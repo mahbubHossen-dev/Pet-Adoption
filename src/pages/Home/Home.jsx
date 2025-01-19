@@ -1,10 +1,18 @@
 import React from 'react';
 import Login from '../Shared/Login';
+import Banner from './Banner';
+import Container from '../../components/Container';
+import Category from './Category';
 
 const Home = () => {
     return (
         <div>
-            Home
+            <Container>
+                <Banner></Banner>
+            </Container>
+            <Container>
+                <Category></Category>
+            </Container>
         </div>
     );
 };
