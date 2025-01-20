@@ -14,7 +14,7 @@ const Home = () => {
         queryKey: ['pets', category],
         queryFn: async () => {
             try {
-                const { data } = await axios.get(`http://localhost:3000/pets/${category}`)
+                const { data } = await axios.get(`http://localhost:3000/pets/${category.toLowerCase()}`)
                 return data
             } catch (error) {
                 console.log(error)

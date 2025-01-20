@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import auth from './../../firebase.config';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import axios from 'axios';
 
 
 
@@ -10,8 +11,8 @@ const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
-
     console.log(user)
+    // console.log(user)
     const createUser = (email, password) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
@@ -30,20 +31,25 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, provider)
     }
 
-    const updateUserProfile = (name, photo) => {
-        return updateUserProfile(auth.currUser, {
+    const updateUserProfile = (name, photoURL) => {
+        setLoading(true)
+        return updateProfile(auth.currentUser, {
             displayName: name,
-            photoURL: photo
+            photoURL: photoURL,
         })
     }
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, currUser => {
-            if(currUser){
-                console.log(currUser)
+        const unsubscribe = onAuthStateChanged(auth, async (currUser) => {
+            if (currUser) {
                 setLoading(false)
                 setUser(currUser)
-            }else{
+                
+                
+
+
+
+            } else {
                 setUser(null)
             }
         })

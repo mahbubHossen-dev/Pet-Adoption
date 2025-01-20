@@ -3,54 +3,34 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import Container from '../../components/Container';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import Social from '../../components/Social';
 
 const Login = () => {
-    const { user, googleLogin } = useAuth()
+    const { user, setUser, signInUser,  googleLogin } = useAuth()
     // console.log(user)
 
-    // const handleLogin = (data) => {
-    //     const email = data.email;
-    //     const password = data.password;
+    const handleLogin = (e) => {
+        e.preventDefault()
+        const form = e.target
+        const email = form.email.value;
+        const password = form.password.value;
 
 
-    //     loginUser(email, password)
-    //         .then(result => {
-    //             toast.success("Login Success")
-    //             updateUserProfile({ email })
-    //                 .then(() => {
-    //                     setUser(result.user)
-    //                 })
-    //                 .catch(err => {
-    //                 })
-    //             navigate(location.state ? `${location.state}` : '/')
-    //         })
-    //         .catch(err => {
-    //             toast.error(err.message)
-    //         })
-    // }
+        signInUser(email, password)
 
-
-    // const handleGoogleLogin = () => {
-    //     userLoginWithGoogle()
-    //         .then(result => {
-    //             toast.success("Login Success")
-    //             setUser(result.user)
-    //             navigate(location.state ? `${location.state}` : '/')
-    //         })
-    //         .catch(err => {
-    //             toast.error(err.message)
-    //         })
-    // }
-
-    const handleGoogleLogin = () => {
-        googleLogin()
             .then(result => {
-                console.log(result.user)
+                setUser(result.user)
+                toast.success("Login Success")
+                
+                // navigate(location.state ? `${location.state}` : '/')
             })
             .catch(err => {
-                console.log(err)
+                toast.error(err.message)
             })
     }
+    
 
     return (
         <Container>
@@ -61,7 +41,7 @@ const Login = () => {
                         <h2 className="text-3xl font-bold text-center mb-4">Log in!</h2>
                         <p className="text-center text-gray-300 mb-6 ita">Welcome to movie CinemaVibe.</p>
 
-                        <form
+                        <form onSubmit={handleLogin}
                         >
                             <div className="mb-4">
                                 <label className="block text-sm mb-2">
@@ -71,6 +51,7 @@ const Login = () => {
                                     <input
                                         className="w-full p-3 rounded-md bg-gray-800 text-white"
                                         type='email'
+                                        name='email'
 
                                     />
                                     <span className="absolute left-3 top-3 text-gray-400">
@@ -87,6 +68,7 @@ const Login = () => {
                                     <input
                                         className="w-full p-3 rounded-md bg-gray-800 text-white"
                                         type='password'
+                                        name='password'
 
                                     />
                                     <span className="absolute left-3 top-3 text-gray-400">
@@ -110,12 +92,7 @@ const Login = () => {
                             </button>
                         </form>
 
-                        <button
-                            onClick={handleGoogleLogin}
-                            className="mt-4 w-full flex items-center justify-center bg-blue-500 hover:bg-blue-600 transition text-white font-bold py-3 rounded-md"
-                        >
-                            {/* <FaGoogle className="mr-2" /> Login with Google */}Google
-                        </button>
+                        <Social></Social>
 
                         <p className="text-center text-gray-300 mt-6">New user?<Link to='/register' state="" className="text-red-500 hover:underline"> Register here!
                         </Link>

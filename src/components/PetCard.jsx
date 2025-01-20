@@ -1,16 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PetCard = ({pet}) => {
-    const {pet_image, pet_name, pet_age, pet_location, pet_category} = pet || {}
+    const {image, name, age, location, category, _id} = pet || {}
     return (
         <div>
-            <div className='bg-red-400'>
-                <img src={pet_image} alt="" />
-                <h3>{pet_name}</h3>
-                <p>{pet_age}</p>
-                <p>{pet_location}</p>
-                <p>{pet_category}</p>
-                <button>See Details</button>
+            <div className='bg-red-400  p-4'>
+                <img src={image} alt="" />
+                <h3>{name}</h3>
+                <p>{age}</p>
+                <p>{location}</p>
+                <p>{category}</p>
+                <Link to={`/details/${_id}`}><button>See Details</button></Link>
             </div>
         </div>
     );

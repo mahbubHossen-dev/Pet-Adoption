@@ -12,7 +12,7 @@ const Navbar = () => {
     // console.log(isDarkMood)
     const [isScroll, setIsScroll] = useState(false)
     const location = useLocation()
-    console.log(location.pathname)
+    // console.log(location.pathname)
 
     // if () {
 
@@ -50,7 +50,7 @@ const Navbar = () => {
         <NavLink to='/' className='hidden md:block px-4 py-3  '>
             Home
         </NavLink>
-        <NavLink to='/petListing' className='hidden md:block px-4 py-3  '>
+        <NavLink to='/pets' className='hidden md:block px-4 py-3  '>
             Pet Listing
         </NavLink>
         <NavLink to='/donationCampaigns' className='hidden md:block px-4 py-3  '>
