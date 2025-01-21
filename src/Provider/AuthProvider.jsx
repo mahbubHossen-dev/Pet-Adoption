@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
-    console.log(user)
+    // console.log(user)
     // console.log(user)
     const createUser = (email, password) => {
         setLoading(true)
@@ -41,17 +41,36 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currUser) => {
-            if (currUser) {
+            
+                
+                // console.log('state capture', currUser?.email)
+
+                if(currUser?.email){
+                    setUser(currUser)
+                    const user = {email: currUser?.email}
+                    console.log(user)
+                    try {
+                        const {data} = await axios.post(`http://localhost:3000/jwt`, user, {withCredentials: true})
+                        console.log(data)
+                        setLoading(false)
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }
+                else{
+                    try {
+                        const {data} = await axios.post(`http://localhost:3000/logout`, {}, {withCredentials: true})
+                        console.log('logout', data)
+                        setLoading(false)
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }
+
+
+                
                 setLoading(false)
-                setUser(currUser)
-                
-                
-
-
-
-            } else {
-                setUser(null)
-            }
+            
         })
         return () => {
             return unsubscribe()

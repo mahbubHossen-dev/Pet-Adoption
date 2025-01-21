@@ -21,10 +21,11 @@ const Details = () => {
 
         const adoptionRequestData = {
             petId: _id,
-            name,
+            pet_name: name,
             image,
             age,
             user: {
+                user_name: user?.displayName,
                 email: user?.email,
                 phone,
                 address

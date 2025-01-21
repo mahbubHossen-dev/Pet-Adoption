@@ -61,7 +61,8 @@ const AdoptModal = ({ data, handleAdoptModal }) => {
 
                                     <div className='space-y-2'>
                                         <p>Pet_ID: {_id}</p>
-                                        <h3>Name: {name}</h3>
+                                        <h3>Pet Name: {name}</h3>
+                                        <h3>Your Name: {user?.displayName}</h3>
                                         <h3>Your Email: {user?.email}</h3>
                                         <img className='h-20 w-20' src={banner} alt="" />
                                         <form onSubmit={(e) => handleAdoptModal(e, closeModal)} action="" className='space-y-2'>

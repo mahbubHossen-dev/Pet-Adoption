@@ -5,6 +5,7 @@ import avatarImg from '../../assets/placeholder.jpg'
 import { AiOutlineDownload, AiOutlineMenu } from 'react-icons/ai';
 import useAuth from '../../hooks/useAuth';
 import Container from '../../components/Container';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
     const { user, signOutUser } = useAuth()
@@ -22,11 +23,10 @@ const Navbar = () => {
     const handleLogOut = async () => {
         signOutUser()
             .then(() => {
-                console.log('logout success')
-                console.log(user)
+                toast.success('Logout success!')
             })
             .catch(err => {
-                console.log(err)
+                toast.err(err.message)
             })
 
     }
