@@ -7,6 +7,13 @@ import PetListing from "../pages/PetListing/PetListing";
 import Details from "../pages/Details/Details";
 import DonationCampaigns from "../pages/DonationCampaigns/DonationCampaigns";
 import DonationDetails from "../pages/DonationDetails/DonationDetails";
+import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
+import AddPet from "../pages/Dashboard/AddPet/AddPet";
+import MyAddedPets from "../pages/Dashboard/MyAddedPets/MyAddedPets";
+import AdoptionRequest from "../pages/Dashboard/AdoptionRequest/AdoptionRequest";
+import CreateCampaign from "../pages/Dashboard/CreateCampaign/CreateCampaign";
+import MyDonationCampaign from "../pages/Dashboard/MyDonationCampaign/MyDonationCampaign";
+import MyDonations from "../pages/Dashboard/MyDonations/MyDonations";
 
 const router = createBrowserRouter([
     {
@@ -35,7 +42,7 @@ const router = createBrowserRouter([
                 path: '/donationDetails/:id',
                 element: <DonationDetails></DonationDetails>,
                 // loader: ()
-                // loader: ({params}) => fetch(`http://localhost:3000/details/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:3000/donationDetails/${params.id}`)
             },
             
             {
@@ -47,6 +54,36 @@ const router = createBrowserRouter([
                 element: <Register></Register>
             },
             
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>,
+        children: [
+            {
+                path: '/dashboard/addPet',
+                element: <AddPet></AddPet>
+            },
+            {
+                path: '/dashboard/myAddedPets',
+                element: <MyAddedPets></MyAddedPets>
+            },
+            {
+                path: '/dashboard/adoptionRequest',
+                element: <AdoptionRequest></AdoptionRequest>
+            },
+            {
+                path: '/dashboard/CreateCampaign',
+                element: <CreateCampaign></CreateCampaign>
+            },
+            {
+                path: '/dashboard/myDonationCampaigns',
+                element: <MyDonationCampaign></MyDonationCampaign>
+            },
+            {
+                path: '/dashboard/myDonations',
+                element: <MyDonations></MyDonations>
+            },
         ]
     }
 ])
