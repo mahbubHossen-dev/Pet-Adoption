@@ -14,6 +14,7 @@ import AdoptionRequest from "../pages/Dashboard/AdoptionRequest/AdoptionRequest"
 import CreateCampaign from "../pages/Dashboard/CreateCampaign/CreateCampaign";
 import MyDonationCampaign from "../pages/Dashboard/MyDonationCampaign/MyDonationCampaign";
 import MyDonations from "../pages/Dashboard/MyDonations/MyDonations";
+import UpdateMyPet from "../components/UpdateMyPet";
 
 const router = createBrowserRouter([
     {
@@ -84,7 +85,11 @@ const router = createBrowserRouter([
                 path: '/dashboard/myDonations',
                 element: <MyDonations></MyDonations>
             },
-        ]
+        ],
+    },
+    {
+        path: '/dashboard/update/:id',
+        element: <UpdateMyPet></UpdateMyPet>
     }
 ])
 export default router;
