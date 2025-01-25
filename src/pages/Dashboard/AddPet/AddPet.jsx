@@ -7,8 +7,10 @@ import axios from 'axios';
 import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import Form from '../../../components/form';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 const AddPet = () => {
     const {user} = useAuth()
+    const axiosSecure = useAxiosSecure()
     const [selectedOption, setSelectedOption] = useState(null);
     const { register, handleSubmit, formState: { errors }, } = useForm()
 
@@ -26,9 +28,10 @@ const AddPet = () => {
             createDate: new Date(),
             email: user?.email,
             adopted: false,
+            date: new Date()
         }
         try {
-            const {data} =await axios.post('http://localhost:3000/addedPet', petData)
+            const {data} =await axiosSecure.post('/addedPet', petData)
             console.log(data)
             Swal.fire({
                 position: "top-end",

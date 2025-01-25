@@ -7,12 +7,13 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const UpdateMyPet = () => {
     const { user } = useAuth()
     const [selectedOption, setSelectedOption] = useState(null);
     const {id} = useParams()
-
+    const axiosSecure = useAxiosSecure()
     const { data: myPet = {} } = useQuery({
         queryKey: ['pets', user?.email],
         queryFn: async () => {
@@ -39,7 +40,7 @@ const UpdateMyPet = () => {
             adopted: false
         }
         try {
-            const { data } = await axios.patch(`http://localhost:3000/updatePet/${id}`, updatePetData)
+            const { data } = await axiosSecure.patch(`/updatePet/${id}`, updatePetData)
             console.log(data)
             Swal.fire({
                 position: "top-end",

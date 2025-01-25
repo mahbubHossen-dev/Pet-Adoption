@@ -15,6 +15,7 @@ import CreateCampaign from "../pages/Dashboard/CreateCampaign/CreateCampaign";
 import MyDonationCampaign from "../pages/Dashboard/MyDonationCampaign/MyDonationCampaign";
 import MyDonations from "../pages/Dashboard/MyDonations/MyDonations";
 import UpdateMyPet from "../components/UpdateMyPet";
+import PrivateRoute from "../pages/PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -63,33 +64,33 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard/addPet',
-                element: <AddPet></AddPet>
+                element: <PrivateRoute><AddPet></AddPet></PrivateRoute>
             },
             {
                 path: '/dashboard/myAddedPets',
-                element: <MyAddedPets></MyAddedPets>
+                element: <PrivateRoute><MyAddedPets></MyAddedPets></PrivateRoute>
             },
             {
                 path: '/dashboard/adoptionRequest',
-                element: <AdoptionRequest></AdoptionRequest>
+                element: <PrivateRoute><AdoptionRequest></AdoptionRequest></PrivateRoute>
             },
             {
                 path: '/dashboard/CreateCampaign',
-                element: <CreateCampaign></CreateCampaign>
+                element: <PrivateRoute><CreateCampaign></CreateCampaign></PrivateRoute>
             },
             {
                 path: '/dashboard/myDonationCampaigns',
-                element: <MyDonationCampaign></MyDonationCampaign>
+                element: <PrivateRoute><MyDonationCampaign></MyDonationCampaign></PrivateRoute>
             },
             {
                 path: '/dashboard/myDonations',
-                element: <MyDonations></MyDonations>
+                element: <PrivateRoute><MyDonations></MyDonations></PrivateRoute>
             },
         ],
     },
     {
         path: '/dashboard/update/:id',
-        element: <UpdateMyPet></UpdateMyPet>
+        element: <PrivateRoute><UpdateMyPet></UpdateMyPet></PrivateRoute>
     }
 ])
 export default router;

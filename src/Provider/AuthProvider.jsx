@@ -24,10 +24,12 @@ const AuthProvider = ({ children }) => {
     }
 
     const signOutUser = () => {
+        setLoading(true)
         return signOut(auth)
     }
     const provider = new GoogleAuthProvider();
     const googleLogin = () => {
+        setLoading(true)
         return signInWithPopup(auth, provider)
     }
 
@@ -40,11 +42,8 @@ const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (currUser) => {
+        const unsubscribe = onAuthStateChanged(auth, async (currUser) => {                
             
-                
-                // console.log('state capture', currUser?.email)
-
                 if(currUser?.email){
                     setUser(currUser)
                     const user = {email: currUser?.email}
@@ -52,6 +51,7 @@ const AuthProvider = ({ children }) => {
                     try {
                         const {data} = await axios.post(`http://localhost:3000/jwt`, user, {withCredentials: true})
                         console.log(data)
+                        setUser(currUser)
                         setLoading(false)
                     } catch (error) {
                         console.log(error)
@@ -62,9 +62,11 @@ const AuthProvider = ({ children }) => {
                         const {data} = await axios.post(`http://localhost:3000/logout`, {}, {withCredentials: true})
                         console.log('logout', data)
                         setLoading(false)
+                        
                     } catch (error) {
                         console.log(error)
                     }
+                    setUser(null)
                 }
 
 

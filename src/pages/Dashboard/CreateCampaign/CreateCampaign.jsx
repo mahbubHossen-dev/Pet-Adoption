@@ -4,10 +4,11 @@ import { getImageURL } from '../../../api/utils';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import useAuth from '../../../hooks/useAuth';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const CreateCampaign = () => {
     const {user} = useAuth()
-
+    const axiosSecure = useAxiosSecure()
     const onSubmit = async(data) => {
         const image = await getImageURL(data.image[0])
         console.log(data)
@@ -22,7 +23,7 @@ const CreateCampaign = () => {
             email: user?.email,
         }
         try {
-            const {data} =await axios.post('http://localhost:3000/addDonationCampaign', campaignData)
+            const {data} =await axiosSecure.post('/addDonationCampaign', campaignData)
             console.log(data)
             Swal.fire({
                 position: "top-end",

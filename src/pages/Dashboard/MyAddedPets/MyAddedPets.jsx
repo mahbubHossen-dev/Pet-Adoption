@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../../hooks/useAuth';
 import axios from 'axios';
@@ -13,18 +13,22 @@ import {
 } from "@/components/ui/table"
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 
 const MyAddedPets = () => {
     const { user } = useAuth()
-    const { data: myPets = [] } = useQuery({
-        queryKey: ['pets', user?.email],
+    const axiosSecure = useAxiosSecure()
+    const [status, setStatus] = useState("")
+    const {data: myPets = [], isLoading, refetch} = useQuery({
+        queryKey: ['myPets', user?.email],
         queryFn: async () => {
-            const { data } = await axios.get(`http://localhost:3000/myPets/${user?.email}`)
+            const {data} = await axiosSecure.get(`/myPets/${user?.email}`)
             return data
         }
     })
-
+    
+    console.log(myPets)
     // delete pet
     const handleMyPetsDelete = (id) => {
         Swal.fire({
@@ -38,13 +42,14 @@ const MyAddedPets = () => {
         }).then(async(result) => {
             if (result.isConfirmed) {
                 try {
-                    const { data } = await axios.delete(`http://localhost:3000/removeMyPet/${id}`)
+                    const { data } = await axiosSecure.delete(`/removeMyPet/${id}`, {withCredentials: true})
                     if(data.deletedCount > 0){
                         Swal.fire({
                             title: "Deleted!",
                             text: "Your file has been deleted.",
                             icon: "success"
                         });
+                        refetch()
                     }
                 } catch (error) {
                     console.log(error)
@@ -58,13 +63,21 @@ const MyAddedPets = () => {
         console.log(id)
     } 
 
-    const getAdopted = async (id) => {
-        const statusUpdateData = {
+    const handleAdopted = async (id, adoStatus, adopted) => {
+        const adoptedStatus = {
             adopted: true,
-            email: user.email
+            adoptionStatus: 'Adopted'
         }
         try {
-            const { data } = await axios.patch(`http://localhost:3000/myAddedPet/${id}`, statusUpdateData)
+            const { data } = await axiosSecure.patch(`/petAdopted/${id}`, adoptedStatus)
+            // if (adopted === true && adoptedStatus === 'requested') {
+            //     setStatus('Adopted');
+            //   } else if (adopted === false && adoptedStatus === 'requested') {
+            //     setStatus('Requested');
+            //   } else {
+            //     setStatus('Not Requested');
+            //   }
+            refetch()
             console.log(data)
         } catch (error) {
             console.log(error)
@@ -72,7 +85,13 @@ const MyAddedPets = () => {
 
     }
 
+    useEffect(() => {
+        
+    }, [])
 
+    if(isLoading){
+        return <p>Loading...</p>
+    }
     return (
         <div>
             <Table>
@@ -90,15 +109,25 @@ const MyAddedPets = () => {
                 </TableHeader>
                 <TableBody>
                     {
-                        myPets.map((pet, idx) => <TableRow key={pet._id}>
+                        myPets?.map((pet, idx) => <TableRow key={pet._id}>
                             <TableCell className="font-medium">{idx + 1}</TableCell>
                             <TableCell className="font-medium"><img src={pet.img} alt="" /></TableCell>
                             <TableCell className="font-medium">{pet.name}</TableCell>
                             <TableCell className="font-medium">{pet.category}</TableCell>
-                            <TableCell className="font-medium">{pet.adopted ? 'Adopted' : 'Not Adopted'}</TableCell>
+
+                            {/* {
+                                pet.adoptedStatus === 'requested' && pet.adopted === false? <TableCell className="font-medium">requested</TableCell> : pet.adoptedStatus === 'requested' && pet.adopted === true? <TableCell className="font-medium">Adopted</TableCell>
+                            } */}
+
+
+                            {
+                                <TableCell className="font-medium">{pet.adoptionStatus ? pet.adoptionStatus : 'Not Requested'}</TableCell>
+                            }
+
+                            {/* <TableCell className="font-medium">{pet.adopted === true ? 'Adopted' : 'Not Adopted'}</TableCell> */}
                             <TableCell className="font-medium"><Link to={`/dashboard/update/${pet._id}`}><button>Update</button></Link></TableCell>
                             <TableCell className="font-medium"><button onClick={() => handleMyPetsDelete(pet._id)}>DELETE</button></TableCell>
-                            <TableCell className="font-medium"><button onClick={() => getAdopted(pet._id)}>Adopted</button></TableCell>
+                            <TableCell className="font-medium"><button onClick={() => handleAdopted(pet._id, pet.adoptedStatus, pet.adopted)}>Adopted</button></TableCell>
                         </TableRow>)
                     }
 

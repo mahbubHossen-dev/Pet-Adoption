@@ -7,37 +7,38 @@ import AdoptModal from '../../components/AdoptModal';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 const Details = () => {
+    const axiosSecure = useAxiosSecure()
     const { user } = useAuth()
     const data = useLoaderData()
-    const { name, image, age, location, _id } = data || {}
+    const { name, image, age, location, _id, category, email } = data || {}
     console.log(data)
 
     const handleAdoptModal = async (e, closeModal) => {
         e.preventDefault()
+        console.log('click')
         const form = e.target;
         const phone = form.phone.value
         const address = form.address.value
 
         const adoptionRequestData = {
-            petId: _id,
-            pet_name: name,
-            image,
-            age,
-            user: {
+            adoptionStatus: 'requested',
+            adoptReqUserInfo: {
                 user_name: user?.displayName,
                 email: user?.email,
                 phone,
                 address
             },
-            status: 'requested'
         }
+        console.log(adoptionRequestData)
         try {
-            const { data } = await axios.post('http://localhost:3000/adoptionRequest', adoptionRequestData)
+            const { data } = await axios.patch(`http://localhost:3000/adoptionRequest/${_id}`, adoptionRequestData)
             console.log(data)
             toast.success('Request send successful!')
             
         } catch (error) {
+            // toast.error(error)
             toast.error(error.response.data)
         }finally{
             closeModal()
