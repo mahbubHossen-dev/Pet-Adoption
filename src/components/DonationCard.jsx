@@ -5,16 +5,16 @@ const DonationCard = ({ donation }) => {
     console.log(donation)
     const {name, image, max_donation_amount, donated_amount, date, _id} = donation || {}
     return (
-        <div>
-            <div className='bg-red-400  p-4'>
-                <img src={image} alt="" />
+        
+            <div className='p-4 shadow-[0px_2px_4px_0px_rgba(14,30,37,0.12),_0px_2px_16px_0px_rgba(14,30,37,0.32)] '>
+                <img src={image} className='h-52 w-full object-cover' alt="" />
                 <h3>{name}</h3>
-                <p>${max_donation_amount}</p>
-                <p>${donated_amount}</p>
+                <p>Max Donation Amount: ${max_donation_amount}</p>
+                <p>Donated Amount: ${donated_amount}</p>
                 <p>{date}</p>
-                <Link to={`/donationDetails/${_id}`}><button>See Details</button></Link>
+                <Link to={`/donationDetails/${_id}`}><button className='bg-orange-200 py-2 px-6 rounded-xl'>See Details</button></Link>
             </div>
-        </div>
+        
     );
 };
 

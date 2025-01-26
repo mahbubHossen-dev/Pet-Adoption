@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Select } from '@headlessui/react'
+import toast from 'react-hot-toast';
 
 const PetListing = () => {
     const [search, setSearch] = useState("")
@@ -13,13 +14,14 @@ const PetListing = () => {
     console.log(category)
 
     const { data: pets=[] } = useQuery({
-        queryKey: ['allPets', search, category],
+        queryKey: ['allPets'],
         queryFn: async () => {
             try {
                 const { data } = await axios.get(`http://localhost:3000/pets?category=${category.toLowerCase()}&search=${search}`)
                 return data
             } catch (error) {
-                console.log(error)
+                console.log(error.response.data)
+                toast.error(error.response.data)
             }
         }
     })
@@ -29,8 +31,8 @@ const PetListing = () => {
     return (
         <div>
             <Container>
-                <div>
-                    <div className=''>
+                <div className=''>
+                    <div className='flex justify-between items-center'>
                         <Select onChange={(e) => setCategory(e.target.value)} defaultValue={'Category'} name="status" aria-label="Project status" className="border data-[hover]:shadow data-[focus]:bg-blue-100">
                             <option value="Category" disabled>Category</option>
                             <option value="Cat">Cat</option>
@@ -39,7 +41,7 @@ const PetListing = () => {
                             <option value="Bird">Bird</option>
                             <option value="Fish">Fish</option>
                         </Select>
-                        <div className='text-right'>
+                        <div className=''>
                             <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder='search' className='border-2 mb-6 p-2 rounded-full' />
                         </div>
                     </div>

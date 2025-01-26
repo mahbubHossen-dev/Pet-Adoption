@@ -10,10 +10,11 @@ import toast from 'react-hot-toast';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 const Details = () => {
     const axiosSecure = useAxiosSecure()
+    
     const { user } = useAuth()
     const data = useLoaderData()
-    const { name, image, age, location, _id, category, email } = data || {}
-    console.log(data)
+    const { name, image, age, location, shortDescription, longDescription, _id } = data || {}
+    // console.log(data)
 
     const handleAdoptModal = async (e, closeModal) => {
         e.preventDefault()
@@ -33,13 +34,15 @@ const Details = () => {
         }
         console.log(adoptionRequestData)
         try {
-            const { data } = await axios.patch(`http://localhost:3000/adoptionRequest/${_id}`, adoptionRequestData)
-            console.log(data)
-            toast.success('Request send successful!')
+            const { data } = await axiosSecure.patch(`/adoptionRequest/${_id}`, adoptionRequestData)
+            if(data.modifiedCount > 0){
+                toast.success('Request send successful!')
+            }
+            
             
         } catch (error) {
-            // toast.error(error)
             toast.error(error.response.data)
+            console.log(error)
         }finally{
             closeModal()
         }
@@ -55,6 +58,8 @@ const Details = () => {
                     <h3 className='text-2xl'>Name: {name}</h3>
                     <p>Age: {age}</p>
                     <p>Location: {location}</p>
+                    <p>{shortDescription}</p>
+                    <p>{longDescription}</p>
                     <AdoptModal handleAdoptModal={handleAdoptModal} data={data}></AdoptModal>
                 </div>
             </div>
