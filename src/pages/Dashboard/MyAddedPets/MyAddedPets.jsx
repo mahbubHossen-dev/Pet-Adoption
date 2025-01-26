@@ -63,20 +63,14 @@ const MyAddedPets = () => {
         console.log(id)
     } 
 
-    const handleAdopted = async (id, adoStatus, adopted) => {
+    const handleAdopted = async (id) => {
         const adoptedStatus = {
             adopted: true,
             adoptionStatus: 'Adopted'
         }
         try {
             const { data } = await axiosSecure.patch(`/petAdopted/${id}`, adoptedStatus)
-            // if (adopted === true && adoptedStatus === 'requested') {
-            //     setStatus('Adopted');
-            //   } else if (adopted === false && adoptedStatus === 'requested') {
-            //     setStatus('Requested');
-            //   } else {
-            //     setStatus('Not Requested');
-            //   }
+            
             refetch()
             console.log(data)
         } catch (error) {

@@ -13,16 +13,23 @@ const CampaignsForm = ({onSubmit}) => {
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                     {/* Name */}
                     <div className=''>
-                        <label>Maximum Donation Amount</label><br />
-                        <input type='number' className='w-full py-2 border-2 rounded-lg' {...register("maxDonate", { required: true })} /> <br />
+                        <label>Name</label><br />
+                        <input type='text' className='w-full py-2 border-2 rounded-lg' {...register("name", { required: true })} /> <br />
                         {errors.name && <span>Name is required</span>}
                     </div>
 
-                    {/* Age */}
+                    {/* Maximum Donation Amount */}
+                    <div className=''>
+                        <label>Maximum Donation Amount</label><br />
+                        <input type='number' className='w-full py-2 border-2 rounded-lg' {...register("maxDonate", { required: true })} /> <br />
+                        {errors.name && <span>Maximum Donation is required</span>}
+                    </div>
+
+                    {/* Last Date of Donation */}
                     <div>
                         <label>Last Date of Donation</label><br />
                         <input type='number' className='w-full py-2 border-2 rounded-lg' {...register("lastDate", { required: true })} /> <br />
-                        {errors.age && <span>Age is required</span>}
+                        {errors.age && <span>Last Date is required</span>}
                     </div>
 
                     {/* Short Description */}
