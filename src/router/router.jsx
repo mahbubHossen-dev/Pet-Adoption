@@ -17,6 +17,10 @@ import MyDonations from "../pages/Dashboard/MyDonations/MyDonations";
 import UpdateMyPet from "../components/UpdateMyPet";
 import PrivateRoute from "../pages/PrivateRoute/PrivateRoute";
 import EditDonation from "../components/EditDonation";
+import Users from "../pages/AdminDashboard/Users/Users";
+import { Users2 } from "lucide-react";
+import AllPets from "../pages/AdminDashboard/AllPets/AllPets";
+import AllDonations from "../pages/AdminDashboard/AllDonations/AllDonations";
 
 const router = createBrowserRouter([
     {
@@ -94,7 +98,19 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/editDonation/:id',
                 element: <PrivateRoute><EditDonation></EditDonation></PrivateRoute>
-            }
+            },
+            {
+                path: '/dashboard/users',
+                element: <Users></Users>
+            },
+            {
+                path: '/dashboard/allPets',
+                element: <AllPets></AllPets>
+            },
+            {
+                path: '/dashboard/allDonations',
+                element: <AllDonations></AllDonations>
+            },
         ],
     },
     

@@ -21,6 +21,7 @@ const CreateCampaign = () => {
             longDescription: data.longDescription,
             createDate: new Date(),
             email: user?.email,
+            pause: false
         }
         try {
             const {data} =await axiosSecure.post('/addDonationCampaign', campaignData)

@@ -1,18 +1,27 @@
 import { Dialog, Input, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { MdOutlineCancel } from "react-icons/md";
 import banner from '../assets/public/work-2.png'
 import useAuth from '../hooks/useAuth'
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
-import CheckoutForm from './CheckoutForm';
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
-const DonateModal = ({donationDetails}) => {
-    const { user } = useAuth()
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import { FaEye } from 'react-icons/fa6';
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+import { useParams } from 'react-router-dom';
+
+const UserShowModal = ({ handleShowUser, id, userDonationData }) => {
+
     let [isOpen, setIsOpen] = useState(false)
-    const [amount, setAmount] = useState(1)
-    // const { name, image, age, location, _id } = data || {}
-    console.log(amount)
+    
+    // console.log(donation)
     function closeModal() {
         setIsOpen(false)
     }
@@ -26,10 +35,10 @@ const DonateModal = ({donationDetails}) => {
             <div className="flex items-center">
                 <button
                     type="button"
-                    onClick={openModal}
+                    onClick={() => handleShowUser(id, openModal)}
                     className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
                 >
-                    Donate Now
+                    <FaEye />
                 </button>
             </div>
 
@@ -59,27 +68,34 @@ const DonateModal = ({donationDetails}) => {
                                 leaveTo="opacity-0 scale-95"
                             >
                                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                    
 
+                                    <Table>
+                                        <TableCaption>A list of your recent invoices.</TableCaption>
+                                        <TableHeader>
+                                            <TableRow>
+                                                <TableHead>s/n</TableHead>
+                                                <TableHead>Name</TableHead>
+                                                <TableHead>Email</TableHead>
+                                                <TableHead>Amount</TableHead>
+                                            </TableRow>
+                                        </TableHeader>
+                                        <TableBody>
+                                            {
+                                                userDonationData?.map((donation, idx) => <TableRow key={donation._id}>
+                                                    <TableCell className="font-medium">{idx + 1}</TableCell>
 
-                                    <div className='space-y-2'>
-                                        <div action="" className='space-y-2'>
+                                                    <TableCell className="font-medium">{donation.donarInfo.name}</TableCell>
 
-                                            <div>
-                                                <label >Donate Amount:</label>
-                                                <input defaultValue={amount} onChange={(e) => setAmount(e.target.value)} type="number" name="amount" className="border data-[hover]:shadow data-[focus]:bg-blue-100" required />
-                                            </div>
-                                            
-                                            {/* Checkout Form */}
-                                            <Elements stripe={stripePromise}>
-                                                    <CheckoutForm closeModal={closeModal} donationDetails={donationDetails} amount={amount}></CheckoutForm>
-                                            </Elements>
+                                                    <TableCell className="font-medium">{donation.donarInfo.email}</TableCell>
 
+                                                    <TableCell className="font-medium">${donation.donarInfo.amount}</TableCell>
 
-                                            
-
-                                        </div>
-
-                                    </div>
+                                                    
+                                                </TableRow>)
+                                            }
+                                        </TableBody>
+                                    </Table>
 
 
                                 </Dialog.Panel>
@@ -91,4 +107,4 @@ const DonateModal = ({donationDetails}) => {
         </>
     )
 }
-export default DonateModal
+export default UserShowModal

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import { CiEdit } from "react-icons/ci";
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useAuth from '../../../hooks/useAuth';
 import { FaPause } from "react-icons/fa6";
-import { FaEye } from "react-icons/fa";
+
 import {
     Table,
     TableBody,
@@ -14,12 +14,16 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import UserShowModal from '../../../components/UserShowModal';
 
 const MyDonationCampaign = () => {
+    const location = useLocation()
     const {user} = useAuth()
     const axiosSecure = useAxiosSecure()
-    const {data: myDonationPet = []} = useQuery({
+    const [userDonationData, setUserDonationData] = useState([])
+
+    const {data: myDonationPet = [], refetch} = useQuery({
         queryKey: ['myDonations', user?.email],
         queryFn: async () => {
             const {data} = await axiosSecure.get(`/myDonationPets/${user?.email}`)
@@ -34,11 +38,45 @@ const MyDonationCampaign = () => {
         console.log('pause click')
         try {
             const {data} = await axiosSecure.patch(`/pauseDonation/${id}`, {pause: true})
+            if(data.modifiedCount > 0){
+                refetch()
+            }
             console.log(data)
         } catch (error) {
             console.log(error)
         }
     }
+
+    const handleUnPaused =async (id) => {
+        try {
+            const {data} = await axiosSecure.patch(`/unPausedDonation/${id}`, {pause: false})
+            console.log(data)
+            if(data.modifiedCount > 0){
+                refetch()
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleShowUser =async (id, openModal) => {
+        console.log(id)
+        openModal()
+        try {
+            const { data } = await axiosSecure.get(`/donarDetails/${id}`)
+            setUserDonationData(data)
+        } catch (error) {
+            console.log(error)
+        }
+
+        
+        // useEffect(() => {
+        //     fetch(`http://localhost:3000/donationUser/${donation._id}`)
+        //     .then(res => res.json())
+        //     .then(data => setUserDonationData(data))
+        // }, [donation._id])
+    }
+    
     return (
         <div>
             <Table>
@@ -62,24 +100,19 @@ const MyDonationCampaign = () => {
                             <TableCell className="font-medium">{donation.max_donation_amount}</TableCell>
                             <TableCell className="font-medium">Progress Bar</TableCell>
 
-                            {/* {
-                                pet.adoptedStatus === 'requested' && pet.adopted === false? <TableCell className="font-medium">requested</TableCell> : pet.adoptedStatus === 'requested' && pet.adopted === true? <TableCell className="font-medium">Adopted</TableCell>
-                            } */}
-
-
-                            
-
                             {
-                                donation.pause ? <TableCell className="font-medium"><button onClick={() => handlePauseDonation (donation._id)}><FaPause />Start</button></TableCell>
+                                donation.pause ? <TableCell className="font-medium"><button onClick={() => handleUnPaused (donation._id)}><FaPause />Unpaused</button></TableCell>
                                  :
                                 <TableCell className="font-medium"><button onClick={() => handlePauseDonation (donation._id)}>Pause</button></TableCell>
                             }
                             
-                            <TableCell className="font-medium"><Link to={`/dashboard/editDonation/${donation._id}`}><button><CiEdit /></button></Link></TableCell>
-                            <TableCell className="font-medium"><button><FaEye /></button></TableCell>
+                            <TableCell className="font-medium"><Link state={location.pathname} to={`/dashboard/editDonation/${donation._id}`}><button><CiEdit /></button></Link></TableCell>
+
+                            <TableCell className="font-medium"><UserShowModal handleShowUser={handleShowUser} id={donation._id} userDonationData={userDonationData}></UserShowModal></TableCell>
+
                         </TableRow>)
                     }
-
+{/* <FaEye /> */}
                 </TableBody>
             </Table>
         </div>

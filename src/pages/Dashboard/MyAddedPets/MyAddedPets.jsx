@@ -58,10 +58,7 @@ const MyAddedPets = () => {
         });
     }
 
-    // update pet
-    const handleMyPetUpdate = (id) => {
-        console.log(id)
-    } 
+    
 
     const handleAdopted = async (id) => {
         const adoptedStatus = {
@@ -78,10 +75,6 @@ const MyAddedPets = () => {
         }
 
     }
-
-    useEffect(() => {
-        
-    }, [])
 
     if(isLoading){
         return <p>Loading...</p>
@@ -127,10 +120,6 @@ const MyAddedPets = () => {
 
                 </TableBody>
             </Table>
-            {/* 
-                        <TableCell>Paid</TableCell>
-                        <TableCell>Credit Card</TableCell>
-                        <TableCell className="text-right">$250.00</TableCell> */}
         </div>
     );
 };

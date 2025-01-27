@@ -1,14 +1,16 @@
 import React from 'react';
 import CampaignsForm from './CampaignsForm';
 import { getImageURL } from './../api/utils';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const EditDonation = () => {
     const {id} = useParams()
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
-    console.log(id)
+    const location = useLocation()
+
+    console.log(location)
     const onSubmit =async (data) => {
         const imageUrl = await getImageURL(data.image[0])
 
@@ -24,7 +26,7 @@ const EditDonation = () => {
 
         try {
             const {data} =await axiosSecure.patch(`/editDonation/${id}`, updateDonationData)
-            navigate('/dashboard/myDonationCampaigns')
+            navigate(`${location.state ? location.state: '/dashboard'}`)
             console.log(data)
         } catch (error) {
             console.log(error)

@@ -45,7 +45,7 @@ const UpdateMyPet = () => {
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "Pet added successfully",
+                title: "Pet Updated successfully",
                 showConfirmButton: false,
                 timer: 1500,
 

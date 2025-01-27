@@ -11,11 +11,11 @@ const Dashboard = () => {
             <Container>
                 <Navbar></Navbar>
                 <div className='grid grid-cols-12 '>
-                    <div className='col-span-2'>
+                    <div className='col-span-3'>
                         <Sidebar></Sidebar>
                     </div>
 
-                    <div className='col-span-10 bg-gray-300'>
+                    <div className='col-span-9 bg-gray-300'>
                         <Outlet></Outlet>
                     </div>
                 </div>
