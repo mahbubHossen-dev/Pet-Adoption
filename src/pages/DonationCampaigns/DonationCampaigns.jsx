@@ -3,17 +3,21 @@ import Container from '../../components/Container';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import DonationCard from '../../components/DonationCard';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const DonationCampaigns = () => {
 
-    const {data: donationData= []} = useQuery({
+    const { data: donationData = [], isLoading } = useQuery({
         queryKey: ['donationCampaigns'],
         queryFn: async () => {
-            const {data} = await axios.get('http://localhost:3000/donations')
+            const { data } = await axios.get('http://localhost:3000/donations')
             return data
         }
     })
     // console.log(donationData)
+    if (isLoading) {
+        return <LoadingSpinner></LoadingSpinner>
+    }
     return (
         <div>
             <Container>

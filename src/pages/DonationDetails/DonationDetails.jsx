@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
 import Container from '../../components/Container';
 import DonateModal from '../../components/DonateModal';
-import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import DonationCard from '../../components/DonationCard';
 

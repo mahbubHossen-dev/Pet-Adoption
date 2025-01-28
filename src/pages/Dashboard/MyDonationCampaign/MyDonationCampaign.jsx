@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/table"
 import { Link, useLocation } from 'react-router-dom';
 import UserShowModal from '../../../components/UserShowModal';
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 const MyDonationCampaign = () => {
     const location = useLocation()
@@ -23,7 +24,7 @@ const MyDonationCampaign = () => {
     const axiosSecure = useAxiosSecure()
     const [userDonationData, setUserDonationData] = useState([])
 
-    const { data: myDonationPet = [], refetch } = useQuery({
+    const { data: myDonationPet = [], refetch, isLoading } = useQuery({
         queryKey: ['myDonations', user?.email],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/myDonationPets/${user?.email}`)
@@ -31,7 +32,9 @@ const MyDonationCampaign = () => {
         }
     })
     console.log(myDonationPet)
-
+    if (isLoading) {
+        return <LoadingSpinner></LoadingSpinner>
+    }
 
     // pause donation
     const handlePause = async (id) => {

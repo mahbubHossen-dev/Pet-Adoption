@@ -3,7 +3,6 @@ import { Fragment, useEffect, useState } from 'react'
 import { MdOutlineCancel } from "react-icons/md";
 import banner from '../assets/public/work-2.png'
 import useAuth from '../hooks/useAuth'
-import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { FaEye } from 'react-icons/fa6';
 import {
@@ -15,7 +14,6 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { useParams } from 'react-router-dom';
 
 const UserShowModal = ({ handleShowUser, id, userDonationData }) => {
 

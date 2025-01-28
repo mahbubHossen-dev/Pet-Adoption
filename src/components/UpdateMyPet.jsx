@@ -8,25 +8,26 @@ import Swal from 'sweetalert2';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import LoadingSpinner from './LoadingSpinner';
 
 const UpdateMyPet = () => {
     const { user } = useAuth()
     const [selectedOption, setSelectedOption] = useState(null);
-    const {id} = useParams()
-    const navigate= useNavigate()
+    const { id } = useParams()
+    const navigate = useNavigate()
     const location = useLocation()
     const axiosSecure = useAxiosSecure()
-    const { data: myPet = {} } = useQuery({
+    const { data: myPet = {}, isLoading } = useQuery({
         queryKey: ['pets', user?.email],
         queryFn: async () => {
             const { data } = await axios.get(`http://localhost:3000/details/${id}`)
             return data
         }
     })
-    
+
     const onSubmit = async (data) => {
-        
-        
+
+
         const image = await getImageURL(data.image[0])
 
         const updatePetData = {
@@ -52,11 +53,15 @@ const UpdateMyPet = () => {
                 timer: 1500,
 
             });
-            navigate(location.state ? location.state: '/dashboard')
+            navigate(location.state ? location.state : '/dashboard')
 
         } catch (error) {
             console.log(error)
         }
+    }
+
+    if (isLoading) {
+        return <LoadingSpinner></LoadingSpinner>
     }
 
     return (

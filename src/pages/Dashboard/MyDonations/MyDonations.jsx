@@ -11,19 +11,25 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 
 const MyDonations = () => {
-    const {user} = useAuth()
+    const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const {data: myDonationsInPet=[]} = useQuery({
+    const { data: myDonationsInPet = [], isLoading } = useQuery({
         queryKey: ['myDonationsInPet', user?.email],
         queryFn: async () => {
-            const {data} = await axiosSecure.get(`/myDonationsInPet/${user?.email}`)
+            const { data } = await axiosSecure.get(`/myDonationsInPet/${user?.email}`)
             return data;
         }
     })
     console.log(myDonationsInPet)
+
+    if (isLoading) {
+        return <LoadingSpinner></LoadingSpinner>
+    }
+
     return (
         <div>
             <Table>

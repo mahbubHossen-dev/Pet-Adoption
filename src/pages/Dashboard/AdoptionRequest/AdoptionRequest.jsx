@@ -15,11 +15,12 @@ import { Link } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa6';
 import { CiEdit } from 'react-icons/ci';
 import SeeRequestModal from '../../../components/SeeRequestModal';
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 const AdoptionRequest = () => {
     const {user} = useAuth()
     const axiosSecure = useAxiosSecure()
-    const {data: requestData = []} = useQuery({
+    const {data: requestData = [], isLoading} = useQuery({
         queryKey: ['adoptionRequest', user?.email],
         queryFn: async () => {
             const {data} = await axiosSecure.get(`/myAdoptionRequest/${user?.email}`)
@@ -29,7 +30,9 @@ const AdoptionRequest = () => {
     
     console.log(requestData)
 
-
+    if(isLoading){
+        return <LoadingSpinner></LoadingSpinner>
+    }
     
 
     return (
