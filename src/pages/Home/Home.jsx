@@ -9,6 +9,7 @@ import PetCard from '../../components/PetCard';
 import Inspire from './Inspire';
 import MeetPartners from './MeetPartners';
 import OurMission from './OurMission';
+import About from './About';
 
 const Home = () => {
 
@@ -34,7 +35,7 @@ const Home = () => {
             </Container>
             <Container>
                 <Category setCategory={setCategory}></Category>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-12'>
                     {
                         pets.map((pet, idx) => <PetCard key={idx} pet={pet}></PetCard>)
                     }
@@ -45,6 +46,8 @@ const Home = () => {
                 <MeetPartners></MeetPartners>
 
                 <OurMission></OurMission>
+
+                <About></About>
             </Container>
         </div>
     );

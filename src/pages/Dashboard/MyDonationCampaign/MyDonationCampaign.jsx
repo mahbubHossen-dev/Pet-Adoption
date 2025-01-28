@@ -69,12 +69,6 @@ const MyDonationCampaign = () => {
             console.log(error)
         }
 
-
-        // useEffect(() => {
-        //     fetch(`http://localhost:3000/donationUser/${donation._id}`)
-        //     .then(res => res.json())
-        //     .then(data => setUserDonationData(data))
-        // }, [donation._id])
     }
 
     return (

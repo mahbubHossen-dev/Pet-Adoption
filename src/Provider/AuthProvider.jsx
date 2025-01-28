@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import auth from './../../firebase.config';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile, GithubAuthProvider } from 'firebase/auth';
 import axios from 'axios';
 
 
@@ -67,44 +67,11 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
-    // useEffect(() => {
-    //     const unsubscribe = onAuthStateChanged(auth, async (currUser) => {                
-            
-    //             if(currUser?.email){
-    //                 setUser(currUser    )
-                   
-    //                 console.log(currUser)
-    //                 try {
-    //                     const {data} = await axios.post(`http://localhost:3000/jwt`, user, {withCredentials: true})
-    //                     console.log(data)
-    //                     setUser(currUser)
-    //                     setLoading(false)
-    //                 } catch (error) {
-    //                     console.log(error)
-    //                 }
-    //             }
-    //             else{
-    //                 try {
-    //                     const {data} = await axios.post(`http://localhost:3000/logout`, {}, {withCredentials: true})
-    //                     console.log('logout', data)
-    //                     setLoading(false)
-                        
-    //                 } catch (error) {
-    //                     console.log(error)
-    //                 }
-    //                 setUser(null)
-    //             }
-
-
-                
-    //             setLoading(false)
-            
-    //     })
-    //     return () => {
-    //         return unsubscribe()
-    //     }
-    // }, [])
-
+    const githubProvider = new GithubAuthProvider();
+    const githubLogin = () => {
+        setLoading(true)
+        return signInWithPopup(auth, githubProvider)
+    }
     
 
     const authInfo = {
@@ -116,6 +83,7 @@ const AuthProvider = ({ children }) => {
         signInUser,
         signOutUser,
         googleLogin,
+        githubLogin,
         updateUserProfile
     }
 

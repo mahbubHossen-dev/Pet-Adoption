@@ -6,13 +6,16 @@ import useAuth from '../hooks/useAuth'
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import CheckoutForm from './CheckoutForm';
+
+
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+
 const DonateModal = ({donationDetails, setPetInDetails}) => {
     const { user } = useAuth()
     let [isOpen, setIsOpen] = useState(false)
     const [amount, setAmount] = useState(1)
     // const { name, image, age, location, _id } = data || {}
-    console.log(amount)
+    // console.log(amount)
     function closeModal() {
         setIsOpen(false)
     }
@@ -25,11 +28,12 @@ const DonateModal = ({donationDetails, setPetInDetails}) => {
         <>
             <div className="flex items-center">
                 <button
+                    disabled={donationDetails.pause === true && true}
                     type="button"
                     onClick={openModal}
                     className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
                 >
-                    Donate Now
+                    {donationDetails.pause ? 'Donation Pause': 'Donate Now'}
                 </button>
             </div>
 

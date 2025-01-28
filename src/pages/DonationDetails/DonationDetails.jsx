@@ -12,14 +12,7 @@ const DonationDetails = () => {
     const axiosSecure = useAxiosSecure()
     const [petInDetails, setPetInDetails] = useState([])
     const donationDetails = useLoaderData()
-    // const { data: donationPetDetails = {} } = useQuery({
-    //     queryKey: ['donationPetDetails', id],
-    //     queryFn: async () => {
-    //         const { data } = await axiosSecure.get(`http://localhost:3000/petDetails/${id}`);
-    //         return data;
-    //     }
-    // });
-    // console.log(params)
+    
     console.log(petInDetails)
     const { name, image, max_donation_amount, donated_amount, lastDateOfDonation, longDescription, shortDescription } = donationDetails || {}
     // console.log(donationPetDetails)

@@ -26,7 +26,7 @@ const Details = () => {
         const adoptionRequestData = {
             adoptionStatus: 'requested',
             adoptReqUserInfo: {
-                user_name: user?.displayName,
+                name: user?.displayName,
                 email: user?.email,
                 phone,
                 address

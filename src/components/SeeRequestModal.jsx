@@ -4,13 +4,12 @@ import { MdOutlineCancel } from "react-icons/md";
 import banner from '../assets/public/work-2.png'
 import useAuth from '../hooks/useAuth'
 import AdoptionRequest from './../pages/Dashboard/AdoptionRequest/AdoptionRequest';
+
+
 const SeeRequestModal = ({ data, handleAdoptModal }) => {
     const { user } = useAuth()
     let [isOpen, setIsOpen] = useState(false)
-    const { adoptReqUserInfo } = data || {}
-    const { user_name, email, phone, address } = adoptReqUserInfo
-
-    console.log(data)
+    
 
     function closeModal() {
         setIsOpen(false)
@@ -58,13 +57,11 @@ const SeeRequestModal = ({ data, handleAdoptModal }) => {
                                 leaveTo="opacity-0 scale-95"
                             >
                                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-
-
                                     <div className='space-y-2'>
-                                        <p>Name: {user_name}</p>
-                                        <h3>Email: {email}</h3>
-                                        <h3>Phone Number: {phone}</h3>
-                                        <h3>Address: {address}</h3>
+                                        <p>Name: {data.adoptReqUserInfo.name}</p>
+                                        <h3>Email: {data.adoptReqUserInfo.email}</h3>
+                                        <h3>Phone Number: {data.adoptReqUserInfo.phone}</h3>
+                                        <h3>Address: {data.adoptReqUserInfo.address}</h3>
 
                                         
                                         <button
@@ -76,8 +73,6 @@ const SeeRequestModal = ({ data, handleAdoptModal }) => {
                                             <MdOutlineCancel className='text-2xl font-thin' />
                                         </button>
                                     </div>
-
-
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>

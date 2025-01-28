@@ -7,7 +7,7 @@ import partner4 from '../../assets/pertners/partner-4.jpg'
 const MeetPartners = () => {
     return (
         <div className='mt-16'>
-            <h1 className='text-center text-2xl'>Meet Our Partners</h1>
+            <h1 className='text-center text-4xl'>Meet Our Partners</h1>
             <div className='mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4'>
                 <div className='text-center'>
                     <img src={partner1} alt="" />

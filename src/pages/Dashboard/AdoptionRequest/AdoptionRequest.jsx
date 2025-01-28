@@ -24,16 +24,13 @@ const AdoptionRequest = () => {
         queryFn: async () => {
             const {data} = await axiosSecure.get(`/myAdoptionRequest/${user?.email}`)
             return data;
-        }
+        },
     })
+    
     console.log(requestData)
 
 
-    const handleAdoptModal = (e, closeModal) => {
-        e.preventDefault()
-        console.log('clco')
-        console.log(e)
-    }
+    
 
     return (
         <div>
@@ -49,7 +46,9 @@ const AdoptionRequest = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {
+
+
+                    {   requestData.length > 0 ?
                         requestData?.map((request, idx) => <TableRow key={request._id}>
                             <TableCell className="font-medium">{idx + 1}</TableCell>
                             <TableCell className="font-medium">
@@ -62,8 +61,9 @@ const AdoptionRequest = () => {
                                 pet.adoptedStatus === 'requested' && pet.adopted === false? <TableCell className="font-medium">requested</TableCell> : pet.adoptedStatus === 'requested' && pet.adopted === true? <TableCell className="font-medium">Adopted</TableCell>
                             } */}
 
-                            <SeeRequestModal data={request} handleAdoptModal={handleAdoptModal}></SeeRequestModal>
+                            <SeeRequestModal data={request}></SeeRequestModal>
                         </TableRow>)
+                        : <h2 className='text-3xl text-center mt-12'>Data Not Available</h2>
                     }
 
                 </TableBody>
