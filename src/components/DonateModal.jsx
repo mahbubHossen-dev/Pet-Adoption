@@ -7,7 +7,7 @@ import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import CheckoutForm from './CheckoutForm';
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
-const DonateModal = ({donationDetails}) => {
+const DonateModal = ({donationDetails, setPetInDetails}) => {
     const { user } = useAuth()
     let [isOpen, setIsOpen] = useState(false)
     const [amount, setAmount] = useState(1)
@@ -71,7 +71,7 @@ const DonateModal = ({donationDetails}) => {
                                             
                                             {/* Checkout Form */}
                                             <Elements stripe={stripePromise}>
-                                                    <CheckoutForm closeModal={closeModal} donationDetails={donationDetails} amount={amount}></CheckoutForm>
+                                                    <CheckoutForm closeModal={closeModal} donationDetails={donationDetails} amount={amount}setPetInDetails={setPetInDetails}></CheckoutForm>
                                             </Elements>
 
 

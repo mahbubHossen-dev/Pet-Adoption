@@ -7,7 +7,7 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 import useAuth from '../hooks/useAuth';
 import { MdOutlineCancel } from 'react-icons/md';
 
-const CheckoutForm = ({ amount, donationDetails, closeModal }) => {
+const CheckoutForm = ({ amount, donationDetails, closeModal, setPetInDetails }) => {
     const { user } = useAuth()
     const [clientSecret, setClientSecret] = useState('')
     const axiosSecure = useAxiosSecure()
@@ -85,11 +85,15 @@ const CheckoutForm = ({ amount, donationDetails, closeModal }) => {
 
             try {
                 const { data } = await axiosSecure.post(`http://localhost:3000/add-donation`, donationPetDetails)
-                console.log(data)
+                if(data.insertedId){
+                    const {data} = await axiosSecure.get('/threePets')
+                    setPetInDetails(data) 
+                    closeModal()
+                    // console.log(data)
+                }
             } catch (error) {
                 console.log(error)
             }
-
         }
     };
 
