@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import Container from '../../components/Container';
 import toast from 'react-hot-toast';
@@ -9,6 +9,8 @@ import Social from '../../components/Social';
 
 const Login = () => {
     const { user, signInUser } = useAuth()
+    const navigate = useNavigate()
+    const location = useLocation()
     // console.log(user)
 
     const handleLogin = (e) => {
@@ -24,7 +26,7 @@ const Login = () => {
                 console.log(result)
                 toast.success("Login Success")
                 
-                // navigate(location.state ? `${location.state}` : '/')
+                navigate(location.state ? `${location.state}` : '/')
             })
             .catch(err => {
                 toast.error(err.message)

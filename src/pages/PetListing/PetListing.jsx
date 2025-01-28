@@ -27,7 +27,7 @@ const PetListing = () => {
     queryFn: async ({ pageParam = 1 }) => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/pets?category=${category.toLowerCase()}&search=${search}&page=${pageParam}&limit=6`
+          `https://pet-adoption-server-psi.vercel.app/pets?category=${category.toLowerCase()}&search=${search}&page=${pageParam}&limit=6`
         );
 
         // API response validation
@@ -138,7 +138,7 @@ export default PetListing;
 //         queryKey: ['allPets', search, category],
 //         queryFn: async () => {
 //             try {
-//                 const { data } = await axios.get(`http://localhost:3000/pets?category=${category.toLowerCase()}&search=${search}`)
+//                 const { data } = await axios.get(`https://pet-adoption-server-psi.vercel.app/pets?category=${category.toLowerCase()}&search=${search}`)
 //                 // const filter = data.filter(pet => pet.adopted === false)
 //                 // console.log(filter)
 //                 return data

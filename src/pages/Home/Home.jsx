@@ -19,7 +19,7 @@ const Home = () => {
         queryKey: ['pets', category],
         queryFn: async () => {
             try {
-                const { data } = await axios.get(`http://localhost:3000/petsHome?category=${category.toLowerCase()}`)
+                const { data } = await axios.get(`https://pet-adoption-server-psi.vercel.app/petsHome?category=${category.toLowerCase()}`)
                 refetch()
                 return data
             } catch (error) {
@@ -29,7 +29,7 @@ const Home = () => {
     })
 
     // useEffect(() => {
-    //     fetch(`http://localhost:3000/petsHome?category=${category.toLowerCase()}`)
+    //     fetch(`https://pet-adoption-server-psi.vercel.app/petsHome?category=${category.toLowerCase()}`)
     //     .then(res => res.json())
     //     .then(data => (data))
     // }, [category])
