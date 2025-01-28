@@ -47,15 +47,24 @@ const Navbar = () => {
             location.pathname == '/' ? <li><a href={`${location.pathname == '/' ? '#top' : '/'}`} className='font-Ovo'>Home</a></li> : <li><Link  to='/' className='font-Ovo'>Home</Link></li>
         } */}
 
-        <NavLink to='/' className='hidden md:block px-4 py-3  '>
-            Home
-        </NavLink>
-        <NavLink to='/pets' className='hidden md:block px-4 py-3  '>
+        <li className='bg-blue-600 py-1 px-2 text-white rounded-md'>
+            <NavLink to='/' className='hidden md:block'>Home</NavLink>
+        </li>
+        <li className='bg-blue-600 py-1 px-2 text-white rounded-md'>
+        <NavLink to='/pets' className='hidden md:block '>
             Pet Listing
         </NavLink>
-        <NavLink to='/donationCampaigns' className='hidden md:block px-4 py-3  '>
+        </li>
+        <li className='bg-blue-600 py-1 px-2 text-white rounded-md'>
+        <NavLink to='/donationCampaigns' className='hidden md:block'>
             Donation Campaigns
         </NavLink>
+        </li>
+        
+            
+        
+        
+        
     </>
 
     return (
