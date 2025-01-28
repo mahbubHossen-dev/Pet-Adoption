@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../../hooks/useAuth';
 import axios from 'axios';
+import { MdDelete } from "react-icons/md";
 import {
     Table,
     TableBody,
@@ -12,13 +13,15 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 
 const MyAddedPets = () => {
     const { user } = useAuth()
+    const location =useLocation()
     const axiosSecure = useAxiosSecure()
+    const [isSorted, setIsSorted] = useState(false);
     const [status, setStatus] = useState("")
     const {data: myPets = [], isLoading, refetch} = useQuery({
         queryKey: ['myPets', user?.email],
@@ -76,6 +79,13 @@ const MyAddedPets = () => {
 
     }
 
+
+    const handleSort = () => {
+        myPets.sort((a, b) => a.name.localeCompare(b.name));
+        setIsSorted(!isSorted);  // State Change to Trigger Re-render
+    };
+
+
     if(isLoading){
         return <p>Loading...</p>
     }
@@ -87,8 +97,8 @@ const MyAddedPets = () => {
                     <TableRow>
                         <TableHead>s/n</TableHead>
                         <TableHead>Image</TableHead>
-                        <TableHead>Category</TableHead>
                         <TableHead>Name</TableHead>
+                        <TableHead>Category</TableHead>
                         <TableHead>Adoption Status</TableHead>
                         <TableHead>Update</TableHead>
                         <TableHead>Delete</TableHead>
@@ -98,8 +108,8 @@ const MyAddedPets = () => {
                     {
                         myPets?.map((pet, idx) => <TableRow key={pet._id}>
                             <TableCell className="font-medium">{idx + 1}</TableCell>
-                            <TableCell className="font-medium"><img src={pet.img} alt="" /></TableCell>
-                            <TableCell className="font-medium">{pet.name}</TableCell>
+                            <TableCell className="font-medium"><img src={pet.image} className='h-[60px] w-[80px]' alt="" /></TableCell>
+                            <TableCell onClick={handleSort} className="font-medium cursor-pointer">{pet.name}</TableCell>
                             <TableCell className="font-medium">{pet.category}</TableCell>
 
                             {/* {
@@ -108,13 +118,15 @@ const MyAddedPets = () => {
 
 
                             {
-                                <TableCell className="font-medium">{pet.adoptionStatus ? pet.adoptionStatus : 'Not Requested'}</TableCell>
+                                <TableCell className="font-medium">{pet.adopted ? 'Adopted' : 'Not Adopted'}</TableCell>
                             }
 
                             {/* <TableCell className="font-medium">{pet.adopted === true ? 'Adopted' : 'Not Adopted'}</TableCell> */}
-                            <TableCell className="font-medium"><Link to={`/dashboard/update/${pet._id}`}><button>Update</button></Link></TableCell>
-                            <TableCell className="font-medium"><button onClick={() => handleMyPetsDelete(pet._id)}>DELETE</button></TableCell>
-                            <TableCell className="font-medium"><button onClick={() => handleAdopted(pet._id, pet.adoptedStatus, pet.adopted)}>Adopted</button></TableCell>
+                            <TableCell className="font-medium"><Link state={location.pathname} to={`/dashboard/update/${pet._id}`}><button className='btn py-2 px-3 bg-gray-500 text-white'>Update</button></Link></TableCell>
+
+                            <TableCell className="font-medium "><button className='btn py-2 px-3 bg-gray-500 text-white' onClick={() => handleMyPetsDelete(pet._id)}><MdDelete  className='text-xl'/></button></TableCell>
+
+                            <TableCell className="font-medium "><button className='btn py-2 px-3 bg-gray-500 text-white' onClick={() => handleAdopted(pet._id, pet.adoptedStatus, pet.adopted)}>Adopt</button></TableCell>
                         </TableRow>)
                     }
 

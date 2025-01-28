@@ -80,7 +80,8 @@ const CheckoutForm = ({ amount, donationDetails, closeModal, setPetInDetails }) 
                     amount: Number(amount),
                     email: user?.email,
                     name: user?.displayName,
-                }
+                },
+                pause: false,
             }
 
             try {

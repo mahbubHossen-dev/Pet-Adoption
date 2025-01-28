@@ -25,6 +25,36 @@ const AllDonations = () => {
             return data
         }
     })
+
+    // handlePause
+
+    const handlePause = async (id) => {
+        const adoptedStatus = {
+            pause: true,
+        }
+        try {
+            const { data } = await axiosSecure.patch(`/pauseDonation/${id}`, adoptedStatus)
+            refetch()
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+    const handleUnPause = async (id) => {
+        const adoptedStatus = {
+            pause: false,
+        }
+        try {
+            const { data } = await axiosSecure.patch(`/unpauseDonation/${id}`, adoptedStatus)
+            refetch()
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
     
 
     const handleCampaignsDelete = (id) => {
@@ -86,8 +116,13 @@ const AllDonations = () => {
                                     <TableCell className="font-medium"><button onClick={() => handleCampaignsDelete(donation._id)}>Delete</button></TableCell>
 
                                     <TableCell className="font-medium"><Link state={location.pathname} to={`/dashboard/editDonation/${donation._id}`}><button><CiEdit /></button></Link></TableCell>
-
-                                    <TableCell className="font-medium"><button>Pause</button></TableCell>
+                                    
+                                    {
+                                        donation.pause === true ? <TableCell className="font-medium"><button onClick={() => handleUnPause(donation._id)} className='bg-gray-600 py-2 px-3 text-white'>Unpause</button></TableCell>
+                                        : 
+                                        <TableCell className="font-medium"><button className='bg-gray-600 py-2 px-3 text-white' onClick={() => handlePause (donation._id)}>Pause</button></TableCell>
+                                    }
+                                    
         
                                     
                                 </TableRow>)

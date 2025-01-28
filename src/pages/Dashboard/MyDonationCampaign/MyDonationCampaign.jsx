@@ -19,26 +19,26 @@ import UserShowModal from '../../../components/UserShowModal';
 
 const MyDonationCampaign = () => {
     const location = useLocation()
-    const {user} = useAuth()
+    const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const [userDonationData, setUserDonationData] = useState([])
 
-    const {data: myDonationPet = [], refetch} = useQuery({
+    const { data: myDonationPet = [], refetch } = useQuery({
         queryKey: ['myDonations', user?.email],
         queryFn: async () => {
-            const {data} = await axiosSecure.get(`/myDonationPets/${user?.email}`)
+            const { data } = await axiosSecure.get(`/myDonationPets/${user?.email}`)
             return data
         }
-    })  
+    })
     console.log(myDonationPet)
 
 
     // pause donation
-    const handlePauseDonation =async (id) => {
+    const handlePause = async (id) => {
         console.log('pause click')
         try {
-            const {data} = await axiosSecure.patch(`/pauseDonation/${id}`, {pause: true})
-            if(data.modifiedCount > 0){
+            const { data } = await axiosSecure.patch(`/pauseDonation/${id}`, { pause: true })
+            if (data.modifiedCount > 0) {
                 refetch()
             }
             console.log(data)
@@ -47,11 +47,11 @@ const MyDonationCampaign = () => {
         }
     }
 
-    const handleUnPaused =async (id) => {
+    const handleUnPause = async (id) => {
         try {
-            const {data} = await axiosSecure.patch(`/unPausedDonation/${id}`, {pause: false})
+            const { data } = await axiosSecure.patch(`/unPausedDonation/${id}`, { pause: false })
             console.log(data)
-            if(data.modifiedCount > 0){
+            if (data.modifiedCount > 0) {
                 refetch()
             }
         } catch (error) {
@@ -59,7 +59,7 @@ const MyDonationCampaign = () => {
         }
     }
 
-    const handleShowUser =async (id, openModal) => {
+    const handleShowUser = async (id, openModal) => {
         console.log(id)
         openModal()
         try {
@@ -69,14 +69,14 @@ const MyDonationCampaign = () => {
             console.log(error)
         }
 
-        
+
         // useEffect(() => {
         //     fetch(`http://localhost:3000/donationUser/${donation._id}`)
         //     .then(res => res.json())
         //     .then(data => setUserDonationData(data))
         // }, [donation._id])
     }
-    
+
     return (
         <div>
             <Table>
@@ -101,18 +101,18 @@ const MyDonationCampaign = () => {
                             <TableCell className="font-medium">Progress Bar</TableCell>
 
                             {
-                                donation.pause ? <TableCell className="font-medium"><button onClick={() => handleUnPaused (donation._id)}><FaPause />Unpaused</button></TableCell>
-                                 :
-                                <TableCell className="font-medium"><button onClick={() => handlePauseDonation (donation._id)}>Pause</button></TableCell>
+                                donation.pause === true ? <TableCell className="font-medium"><button onClick={() => handleUnPause(donation._id)} className='bg-gray-600 py-2 px-3 text-white'>Unpause</button></TableCell>
+                                    :
+                                    <TableCell className="font-medium"><button className='bg-gray-600 py-2 px-3 text-white' onClick={() => handlePause(donation._id)}>Pause</button></TableCell>
                             }
-                            
+
                             <TableCell className="font-medium"><Link state={location.pathname} to={`/dashboard/editDonation/${donation._id}`}><button><CiEdit /></button></Link></TableCell>
 
                             <TableCell className="font-medium"><UserShowModal handleShowUser={handleShowUser} id={donation._id} userDonationData={userDonationData}></UserShowModal></TableCell>
 
                         </TableRow>)
                     }
-{/* <FaEye /> */}
+                    {/* <FaEye /> */}
                 </TableBody>
             </Table>
         </div>

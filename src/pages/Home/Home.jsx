@@ -6,6 +6,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query'
 import PetCard from '../../components/PetCard';
+import Inspire from './Inspire';
+import MeetPartners from './MeetPartners';
+import OurMission from './OurMission';
 
 const Home = () => {
 
@@ -36,6 +39,12 @@ const Home = () => {
                         pets.map((pet, idx) => <PetCard key={idx} pet={pet}></PetCard>)
                     }
                 </div>
+
+                <Inspire></Inspire>
+
+                <MeetPartners></MeetPartners>
+
+                <OurMission></OurMission>
             </Container>
         </div>
     );

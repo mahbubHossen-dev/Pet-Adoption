@@ -8,7 +8,7 @@ import axios from 'axios';
 import Social from '../../components/Social';
 
 const Login = () => {
-    const { user, setUser, signInUser,  googleLogin } = useAuth()
+    const { user, signInUser } = useAuth()
     // console.log(user)
 
     const handleLogin = (e) => {
@@ -21,7 +21,7 @@ const Login = () => {
         signInUser(email, password)
 
             .then(result => {
-                setUser(result.user)
+                console.log(result)
                 toast.success("Login Success")
                 
                 // navigate(location.state ? `${location.state}` : '/')
@@ -34,12 +34,12 @@ const Login = () => {
 
     return (
         <Container>
-            <div className='py-12 pt-24'>
+            <div className='py-12 pt-24 bg-[#05212A]'>
 
-                <div className="bg-cover bg-center flex items-center justify-center">
-                    <div className="bg-black bg-opacity-60 p-8 rounded-md w-full max-w-md text-white">
+                <div className="bg-cover  bg-center flex items-center justify-center">
+                    <div className="bg-white p-8 rounded-md w-full max-w-md text-black">
                         <h2 className="text-3xl font-bold text-center mb-4">Log in!</h2>
-                        <p className="text-center text-gray-300 mb-6 ita">Welcome to movie CinemaVibe.</p>
+                        <p className="text-center text-gray-600 mb-6 ita">Welcome to movie CinemaVibe.</p>
 
                         <form onSubmit={handleLogin}
                         >
@@ -49,7 +49,7 @@ const Login = () => {
                                 </label>
                                 <div className="relative">
                                     <input
-                                        className="w-full p-3 rounded-md bg-gray-800 text-white"
+                                        className="w-full p-3 rounded-md  text-black border-2"
                                         type='email'
                                         name='email'
 
@@ -66,7 +66,7 @@ const Login = () => {
                                 </label>
                                 <div className="relative">
                                     <input
-                                        className="w-full p-3 rounded-md bg-gray-800 text-white"
+                                        className="w-full p-3 rounded-md  text-black  border-2"
                                         type='password'
                                         name='password'
 
@@ -94,7 +94,7 @@ const Login = () => {
 
                         <Social></Social>
 
-                        <p className="text-center text-gray-300 mt-6">New user?<Link to='/register' state="" className="text-red-500 hover:underline"> Register here!
+                        <p className="text-center text-gray-600 mt-6">New user?<Link to='/signUp' state="" className="text-red-500 hover:underline"> Register here!
                         </Link>
                         </p>
                     </div>

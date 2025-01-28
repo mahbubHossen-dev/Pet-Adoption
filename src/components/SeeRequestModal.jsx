@@ -10,7 +10,7 @@ const SeeRequestModal = ({ data, handleAdoptModal }) => {
     const { adoptReqUserInfo } = data || {}
     const { user_name, email, phone, address } = adoptReqUserInfo
 
-    // console.log(adoptReqUserInfo)
+    console.log(data)
 
     function closeModal() {
         setIsOpen(false)

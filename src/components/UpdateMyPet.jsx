@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { getImageURL } from '../api/utils';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 
@@ -13,6 +13,8 @@ const UpdateMyPet = () => {
     const { user } = useAuth()
     const [selectedOption, setSelectedOption] = useState(null);
     const {id} = useParams()
+    const navigate= useNavigate()
+    const location = useLocation()
     const axiosSecure = useAxiosSecure()
     const { data: myPet = {} } = useQuery({
         queryKey: ['pets', user?.email],
@@ -50,6 +52,7 @@ const UpdateMyPet = () => {
                 timer: 1500,
 
             });
+            navigate(location.state ? location.state: '/dashboard')
 
         } catch (error) {
             console.log(error)

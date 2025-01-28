@@ -14,7 +14,7 @@ const useAxiosSecure = () => {
     useEffect(() => {
         axiosSecure.interceptors.response.use(response => {
             return response;
-        }, error => {
+        }, async error => {
             console.log(error)
             if(error.status === 401 || error.status === 403){
                 // user logout

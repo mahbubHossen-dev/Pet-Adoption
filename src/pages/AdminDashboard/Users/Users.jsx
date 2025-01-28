@@ -13,13 +13,32 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const Users = () => {
     const axiosSecure = useAxiosSecure()
-    const {data: users= []} = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['allUsers'],
         queryFn: async () => {
-            const {data} = await axiosSecure.get('http://localhost:3000/users')
+            const { data } = await axiosSecure.get('http://localhost:3000/users')
             return data
         }
     })
+
+    // const handleMakeAdmin = (id) => {
+    //     console.log(id)
+    // }
+    const handleMakeAdmin = async (email) => {
+        const adoptedStatus = {
+            role: 'Admin',
+        }
+        try {
+            const { data } = await axiosSecure.patch(`/makeAdmin/${email}`, adoptedStatus)
+
+            refetch()
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
     console.log(users)
     return (
         <div>
@@ -43,10 +62,17 @@ const Users = () => {
                             </TableCell>
                             <TableCell className="font-medium">{user.name}</TableCell>
                             <TableCell className="font-medium">{user.email}</TableCell>
-                            
-                            <TableCell className="font-medium">
-                                <button className='bg-gray-400 py-2 px-3'>Make Admin</button>
-                            </TableCell>
+
+                            {
+                                user?.role == 'Admin' ? <TableCell className="font-medium">
+                                    <button className='text-green-600 py-2 px-3 text-lg'>Admin</button>
+                                </TableCell> 
+                                : <TableCell className="font-medium">
+                                    <button onClick={() => handleMakeAdmin(user.email)} className='bg-gray-400 py-2 px-3'>Make Admin</button>
+                                </TableCell>
+                            }
+
+
 
 
                             {/* <SeeRequestModal data={request} handleAdoptModal={handleAdoptModal}></SeeRequestModal> */}
@@ -54,7 +80,7 @@ const Users = () => {
                     }
 
                 </TableBody>
-            </Table> 
+            </Table>
         </div>
     );
 };

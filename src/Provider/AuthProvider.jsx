@@ -42,42 +42,70 @@ const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (currUser) => {                
+        const unsubscribe = onAuthStateChanged(auth, currUser => {
+            if (currUser) {
+                setUser(currUser)
+                const user = {email: currUser?.email}
+
+                axios.post(`http://localhost:3000/jwt`, user, {withCredentials: true})
+                    .then(data => console.log(data.data))
+
+            } else {
+                setUser(null)
+                axios.post('http://localhost:3000/logout', {}, {withCredentials: true})
+                    .then(data => console.log(data.data))
+            }
+            setLoading(false)
+
+        })
+
+
+        return () => {
+            unsubscribe()
+        }
+
+    }, [])
+
+
+    // useEffect(() => {
+    //     const unsubscribe = onAuthStateChanged(auth, async (currUser) => {                
             
-                if(currUser?.email){
-                    setUser(currUser)
-                    const user = {email: currUser?.email}
-                    console.log(user)
-                    try {
-                        const {data} = await axios.post(`http://localhost:3000/jwt`, user, {withCredentials: true})
-                        console.log(data)
-                        setUser(currUser)
-                        setLoading(false)
-                    } catch (error) {
-                        console.log(error)
-                    }
-                }
-                else{
-                    try {
-                        const {data} = await axios.post(`http://localhost:3000/logout`, {}, {withCredentials: true})
-                        console.log('logout', data)
-                        setLoading(false)
+    //             if(currUser?.email){
+    //                 setUser(currUser    )
+                   
+    //                 console.log(currUser)
+    //                 try {
+    //                     const {data} = await axios.post(`http://localhost:3000/jwt`, user, {withCredentials: true})
+    //                     console.log(data)
+    //                     setUser(currUser)
+    //                     setLoading(false)
+    //                 } catch (error) {
+    //                     console.log(error)
+    //                 }
+    //             }
+    //             else{
+    //                 try {
+    //                     const {data} = await axios.post(`http://localhost:3000/logout`, {}, {withCredentials: true})
+    //                     console.log('logout', data)
+    //                     setLoading(false)
                         
-                    } catch (error) {
-                        console.log(error)
-                    }
-                    setUser(null)
-                }
+    //                 } catch (error) {
+    //                     console.log(error)
+    //                 }
+    //                 setUser(null)
+    //             }
 
 
                 
-                setLoading(false)
+    //             setLoading(false)
             
-        })
-        return () => {
-            return unsubscribe()
-        }
-    }, [])
+    //     })
+    //     return () => {
+    //         return unsubscribe()
+    //     }
+    // }, [])
+
+    
 
     const authInfo = {
         user,

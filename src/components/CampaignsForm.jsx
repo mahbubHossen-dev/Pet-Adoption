@@ -2,10 +2,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 
-const CampaignsForm = ({onSubmit}) => {
+const CampaignsForm = ({ onSubmit }) => {
 
     const { register, handleSubmit, formState: { errors }, } = useForm()
-    
+
 
     return (
         <div className=' text-black p-12'>
@@ -26,10 +26,20 @@ const CampaignsForm = ({onSubmit}) => {
                     </div>
 
                     {/* Last Date of Donation */}
-                    <div>
+                    {/* <div>
                         <label>Last Date of Donation</label><br />
                         <input type='number' className='w-full py-2 border-2 rounded-lg' {...register("lastDate", { required: true })} /> <br />
                         {errors.age && <span>Last Date is required</span>}
+                    </div> */}
+                    <div>
+                        <label>Last Date of Donation</label><br />
+                        <input
+                            className='w-full py-2 border-2 rounded-lg'
+                            type="date"
+                            {...register("date", {
+                                valueAsDate: true,
+                            })}
+                        />
                     </div>
 
                     {/* Short Description */}
