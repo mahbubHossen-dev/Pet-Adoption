@@ -23,7 +23,7 @@ const EditDonation = () => {
             longDescription: data.longDescription,
             updateDate: new Date(), 
         }
-
+         console.log(updateDonationData)
         try {
             const {data} =await axiosSecure.patch(`/editDonation/${id}`, updateDonationData)
             navigate(`${location.state ? location.state: '/dashboard'}`)

@@ -24,15 +24,15 @@ const Dashboard = () => {
     return (
         <div className=''>
             <Container>
-                <div className='grid grid-cols-12 relative bg-orange-100'>
+                <div className='grid md:grid-cols-12 relative bg-orange-100 min-h-screen'>
                     <button onClick={handleLogOut} className='bg-orange-300 text-white py-2 px-3  font-bold absolute right-2 top-6'>
                         <Link>Logout</Link>
                     </button>
-                    <div className='col-span-3'>
+                    <div className='md:col-span-3 z-50'>
                         <Sidebar></Sidebar>
                     </div>
 
-                    <div className='col-span-9 bg-orange-100 pt-12'>
+                    <div className='md:col-span-9 bg-orange-100 pt-12'>
                         <Outlet></Outlet>
                     </div>
                 </div>

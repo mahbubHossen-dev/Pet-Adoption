@@ -27,7 +27,7 @@ const UpdateMyPet = () => {
 
     const onSubmit = async (data) => {
         const image = await getImageURL(data.image[0])
-
+        console.log(image)
         const updatePetData = {
             name: data.name,
             image,
