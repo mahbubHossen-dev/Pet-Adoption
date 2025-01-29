@@ -6,10 +6,10 @@ const Form = ({myPet, onSubmit, selectedOption, setSelectedOption}) => {
     
     const { register, handleSubmit, formState: { errors }, } = useForm()
     const options = [
-        { value: 'dog', label: 'Dog' },
-        { value: 'cat', label: 'Cat' },
-        { value: 'bird', label: 'Bird' },
-        { value: 'fish', label: 'Fish' },
+        { value: 'Dog', label: 'Dog' },
+        { value: 'Cat', label: 'Cat' },
+        { value: 'Bird', label: 'Bird' },
+        { value: 'Fish', label: 'Fish' },
     ];
     const { name, image, age, location, longDescription, shortDescription } = myPet || {}
     

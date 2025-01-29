@@ -92,6 +92,7 @@ const AllDonations = () => {
 
     return (
         <div>
+            <h3 className='text-2xl font-medium text-center mb-4'>All Donations</h3>
             <Table>
                 <TableCaption>A list of your recent invoices.</TableCaption>
                 <TableHeader>

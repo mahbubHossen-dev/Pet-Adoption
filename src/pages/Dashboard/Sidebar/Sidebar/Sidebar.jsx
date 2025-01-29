@@ -64,21 +64,21 @@ const Sidebar = () => {
                             <li className='bg-blue-600 py-1 px-2 text-white rounded-md'><NavLink to={'/dashboard/myDonations'}>My Donations</NavLink></li>
                         </ul>
 
-                        <ul className='border-t border-2 border-red-600'>
-                            <li className='bg-blue-600 py-1 px-2 text-white rounded-md'><NavLink to='/' className='hidden md:block px-4 py-3  '>
-                                Home
-                            </NavLink></li>
-                            <li className='bg-blue-600 py-1 px-2 text-white rounded-md'>
-                                <NavLink to='/pets' className='hidden md:block px-4 py-3  '>
-                                    Pet Listing
-                                </NavLink>
-                            </li>
-                            <li className='bg-blue-600 py-1 px-2 text-white rounded-md'>
-                                <NavLink to='/donationCampaigns' className='hidden md:block px-4 py-3  '>
-                                    Donation Campaigns
-                                </NavLink>
-                            </li>
-                        </ul>
+                            <ul className='border-t-2 mt-6 pt-6 space-y-2'>
+                                <li className='bg-blue-600 py-1 px-2 text-white rounded-md'><NavLink to='/'>
+                                    Home
+                                </NavLink></li>
+                                <li className='bg-blue-600 py-1 px-2 text-white rounded-md'>
+                                    <NavLink to='/pets' className=''>
+                                        Pet Listing
+                                    </NavLink>
+                                </li>
+                                <li className='bg-blue-600 py-1 px-2 text-white rounded-md'>
+                                    <NavLink to='/donationCampaigns' className=''>
+                                        Donation Campaigns
+                                    </NavLink>
+                                </li>
+                            </ul>
                     </div>
             }
         </div>

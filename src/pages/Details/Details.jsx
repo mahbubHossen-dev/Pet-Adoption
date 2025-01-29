@@ -49,10 +49,11 @@ const Details = () => {
     }
 
     return (
-        <Container>
-            <div className='md:flex gap-8 bg-red-200'>
+        <div className='py-16'>
+            <Container>
+            <div className='md:flex gap-8 bg-orange-100'>
                 <div>
-                    <img src={banner} alt="" />
+                    <img src={image} alt="" />
                 </div>
                 <div>
                     <h3 className='text-2xl'>Name: {name}</h3>
@@ -65,6 +66,7 @@ const Details = () => {
             </div>
 
         </Container>
+        </div>
     );
 };
 

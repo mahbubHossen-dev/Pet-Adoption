@@ -22,7 +22,7 @@ const AddPet = () => {
             image,
             age: data.age,
             location: data.location,
-            category: selectedOption.value,
+            category: (selectedOption.value).toLowerCase(),
             shortDescription: data.shortDescription,
             longDescription: data.longDescription,
             createDate: new Date(),
@@ -50,7 +50,7 @@ const AddPet = () => {
     
     return (
         <div className=' text-black p-12'>
-            <h1>Add Pet</h1>
+            <h1 className='text-2xl font-medium text-center'>Add Pet</h1>
             <Form myPet={false} onSubmit={onSubmit} selectedOption={selectedOption} setSelectedOption={setSelectedOption}></Form>
         </div>
     );

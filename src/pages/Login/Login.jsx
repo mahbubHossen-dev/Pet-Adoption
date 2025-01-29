@@ -36,7 +36,7 @@ const Login = () => {
 
     return (
         <Container>
-            <div className='py-12 pt-24 bg-[#05212A]'>
+            <div className='py-12 bg-orange-100'>
 
                 <div className="bg-cover  bg-center flex items-center justify-center">
                     <div className="bg-white p-8 rounded-md w-full max-w-md text-black">

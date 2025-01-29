@@ -76,6 +76,7 @@ const AllPets = () => {
 
     return (
         <div>
+            <h3 className='text-2xl font-medium text-center mb-4'>All Pets</h3>
             <Table>
                 <TableCaption>A list of your recent invoices.</TableCaption>
                 <TableHeader>
@@ -93,7 +94,7 @@ const AllPets = () => {
                     {
                         allPets?.map((pet, idx) => <TableRow key={pet._id}>
                             <TableCell className="font-medium">{idx + 1}</TableCell>
-                            <TableCell className="font-medium"><img src={pet.img} alt="" /></TableCell>
+                            <TableCell className="font-medium"><img src={pet.image} className='h-[50px] w-[60px]' alt="" /></TableCell>
                             <TableCell className="font-medium">{pet.name}</TableCell>
                             <TableCell className="font-medium">{pet.category}</TableCell>
 

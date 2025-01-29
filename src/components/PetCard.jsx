@@ -13,7 +13,7 @@ const PetCard = ({ pet }) => {
                     <p>{location}</p>
                     <p>{category}</p>
                     <p>{date}</p>
-                    <Link to={`/details/${_id}`}><button className='py-2 px-3 bg-cyan-500 rounded-full w-full'>View Details</button></Link>
+                    <Link to={`/details/${_id}`}><button className='py-2 px-3 bg-orange-500 text-white rounded-full w-full'>View Details</button></Link>
                 </div>
 
             </div>

@@ -26,8 +26,6 @@ const UpdateMyPet = () => {
     })
 
     const onSubmit = async (data) => {
-
-
         const image = await getImageURL(data.image[0])
 
         const updatePetData = {
@@ -60,9 +58,7 @@ const UpdateMyPet = () => {
         }
     }
 
-    if (isLoading) {
-        return <LoadingSpinner></LoadingSpinner>
-    }
+    
 
     return (
         <div>

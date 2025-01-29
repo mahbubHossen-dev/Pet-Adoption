@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import useAuth from '../hooks/useAuth';
 import { MdOutlineCancel } from 'react-icons/md';
+import toast from 'react-hot-toast';
 
 const CheckoutForm = ({ amount, donationDetails, closeModal, setPetInDetails }) => {
     const { user } = useAuth()
@@ -26,6 +27,7 @@ const CheckoutForm = ({ amount, donationDetails, closeModal, setPetInDetails }) 
                 donationId: donationDetails?._id
             })
             setClientSecret(data.clientSecret)
+            
             console.log(data)
         } catch (error) {
             console.log(error)
@@ -85,12 +87,12 @@ const CheckoutForm = ({ amount, donationDetails, closeModal, setPetInDetails }) 
             }
 
             try {
-                const { data } = await axiosSecure.post(`http://localhost:3000/add-donation`, donationPetDetails)
+                const { data } = await axiosSecure.post(`https://pet-adoption-server-psi.vercel.app/add-donation`, donationPetDetails)
                 if(data.insertedId){
                     const {data} = await axiosSecure.get('/threePets')
                     setPetInDetails(data) 
                     closeModal()
-                    // console.log(data)
+                    toast.success('Donation Added Successfully')
                 }
             } catch (error) {
                 console.log(error)
