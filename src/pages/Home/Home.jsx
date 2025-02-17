@@ -42,7 +42,7 @@ const Home = () => {
     // }
 
     return (
-        <div>
+        <div className='pt-20'>
             <Container>
                 <Banner></Banner>
             </Container>

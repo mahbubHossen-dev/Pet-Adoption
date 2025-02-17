@@ -117,3 +117,12 @@
     @apply bg-background text-foreground;
   }
 }
+nav ul li a.active{
+  background-color: #F97315;
+  font-weight: 500;
+  padding-top: 3px;
+}
+
+/* nav ul li a.active{
+  background-color: #F97315;
+} */

@@ -55,6 +55,8 @@ const PetListing = () => {
 
   console.log(data)
 
+ 
+
   // Handle error state
   if (isError) {
     return (
@@ -65,7 +67,7 @@ const PetListing = () => {
   }
 
   return (
-    <div>
+    <div className='pt-24'>
       <Container>
         <h1 className="text-center text-2xl mb-6">Not Adopted Pets</h1>
 
@@ -94,7 +96,10 @@ const PetListing = () => {
         </div>
 
         {/* Pet Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          isLoading ? 
+          <LoadingSpinner></LoadingSpinner> 
+          : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {data?.pages?.map((page, pageIndex) => (
             <React.Fragment key={pageIndex}>
               {page?.results?.map((pet) => (
@@ -103,7 +108,12 @@ const PetListing = () => {
             </React.Fragment>
           ))}
         </div>
+          
+        }
 
+
+
+        
         {/* Infinite Scroll Loading */}
         <div ref={ref} className="text-center mt-4">
           {isFetchingNextPage && <LoadingSpinner />}

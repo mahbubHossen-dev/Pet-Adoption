@@ -1,6 +1,4 @@
 
-
-import React from 'react';
 import Container from '../../components/Container';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -21,7 +19,7 @@ const DonationCampaigns = () => {
         return <LoadingSpinner></LoadingSpinner>
     }
     return (
-        <div>
+        <div className='pt-28'>
             <Container>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                     {
