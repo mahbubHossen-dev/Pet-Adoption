@@ -129,7 +129,7 @@ const Register = () => {
                                 id="name"
                                 name="name"
                                 placeholder="Enter your name"
-                                className="w-full pl-10 p-3 rounded-md border-2  text-white placeholder-gray-500 focus:ring-2 focus:ring-red-500"
+                                className="w-full pl-10 p-3 rounded-md border-2 text-black placeholder-gray-500 focus:ring-2 focus:ring-red-500"
                             />
                         </div>
 

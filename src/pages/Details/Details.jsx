@@ -49,7 +49,7 @@ const Details = () => {
     }
 
     return (
-        <div className='py-16'>
+        <div className='pt-24 pb-12'>
             <Container>
             <div className='md:flex gap-8 bg-orange-100'>
                 <div>

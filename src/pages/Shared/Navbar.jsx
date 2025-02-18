@@ -59,11 +59,10 @@ const Navbar = () => {
                 Donation Campaigns
             </NavLink>
         </li>
-
     </>
 
     return (
-        <div className='bg-orange-500 fixed w-full top-0 ' >
+        <div className='bg-orange-500 fixed w-full top-0 z-50' >
             <Container>
                 <div>
                     {

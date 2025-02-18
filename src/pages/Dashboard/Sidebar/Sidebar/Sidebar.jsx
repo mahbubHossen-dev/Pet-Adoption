@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-// import useAdmin from './../../../../hooks/useAdmin';
+import useAdmin from './../../../../hooks/useAdmin';
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-    // const isAdmin  = useAdmin()
+    const isAdmin  = useAdmin()
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
-  const isAdmin = true
+  console.log(isAdmin)
+//   const isAdmin = true
 
   return (
     <div className="flex">
@@ -26,9 +27,8 @@ const Sidebar = () => {
         ${isOpen ? "translate-x-0" : "-translate-x-full"} md:static md:w-64`}
       > 
             <div>
-            {
-                isAdmin ?
-                    <>
+
+            <>
                         <div >
                             <ul className=' space-y-2'>
                                 <li className='bg-blue-600 py-1 px-2 text-white rounded-md'><NavLink to={'/dashboard/addPet'}>Add a pet</NavLink></li>
@@ -58,15 +58,20 @@ const Sidebar = () => {
                             </ul>
                         </div>
 
-                        <div className='border-t-2 mt-6 pt-6'>
+                        {
+                            isAdmin && <div className='border-t-2 mt-6 pt-6'>
                             <ul className=' space-y-2'>
                                 <li className='bg-blue-600 py-1 px-2 text-white rounded-md'><NavLink to={'/dashboard/users'}>Users</NavLink></li>
                                 <li className='bg-blue-600 py-1 px-2 text-white rounded-md'><NavLink to={'/dashboard/allPets'}>All Pets</NavLink></li>
                                 <li className='bg-blue-600 py-1 px-2 text-white rounded-md'><NavLink to={'/dashboard/allDonations'}>All Donations</NavLink></li>
                             </ul>
                         </div>
+                        }
 
-                    </> :
+                    </> 
+            {/* {
+                isAdmin ?
+                    :
                     <div >
                         <ul className=' space-y-2'>
                             <li className='bg-blue-600 py-1 px-2 text-white rounded-md'><NavLink to={'/dashboard/addPet'}>Add a pet</NavLink></li>
@@ -93,7 +98,7 @@ const Sidebar = () => {
                                 </li>
                             </ul>
                     </div>
-            }
+            } */}
             </div>
       </div>
     </div>
