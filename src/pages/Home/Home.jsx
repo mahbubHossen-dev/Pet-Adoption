@@ -11,6 +11,10 @@ import MeetPartners from './MeetPartners';
 import OurMission from './OurMission';
 import About from './About';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import PetServices from './PetServices';
+import Feedback from './Feedback';
+import NewsLater from './NewsLater';
+import Achievements from './Achievements';
 
 const Home = () => {
 
@@ -56,11 +60,19 @@ const Home = () => {
 
                 <Inspire></Inspire>
 
+                <PetServices></PetServices>
+
                 <MeetPartners></MeetPartners>
 
                 <OurMission></OurMission>
 
                 <About></About>
+
+                <Achievements></Achievements>
+
+                <Feedback></Feedback>
+
+                <NewsLater></NewsLater>
             </Container>
         </div>
     );

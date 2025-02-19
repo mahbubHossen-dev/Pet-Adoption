@@ -14,12 +14,13 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Link } from 'react-router-dom';
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 const AllPets = () => {
 
     const axiosSecure = useAxiosSecure()
 
-    const { data: allPets = [], refetch} = useQuery({
+    const { data: allPets = [], refetch, isLoading} = useQuery({
         queryKey: ['allPets'],
         queryFn: async () => {
             const { data } = await axiosSecure.get('https://pet-adoption-server-psi.vercel.app/allPets')
@@ -73,6 +74,10 @@ const AllPets = () => {
     
         }
 
+
+        if(isLoading){
+                return <LoadingSpinner></LoadingSpinner>
+            }
 
     return (
         <div>

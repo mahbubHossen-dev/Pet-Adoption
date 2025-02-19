@@ -21,6 +21,8 @@ import Users from "../pages/AdminDashboard/Users/Users";
 import { Users2 } from "lucide-react";
 import AllPets from "../pages/AdminDashboard/AllPets/AllPets";
 import AllDonations from "../pages/AdminDashboard/AllDonations/AllDonations";
+import Profile from "../pages/Dashboard/Profile/Profile";
+import PetServices from "../pages/Home/PetServices";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +59,10 @@ const router = createBrowserRouter([
                 element: <Login></Login>
             },
             {
+                path: '/petServices',
+                element: <PetServices></PetServices>
+            },
+            {
                 path: '/signup',
                 element: <Register></Register>
             },
@@ -65,7 +71,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             {
                 path: '/dashboard/addPet',
@@ -110,6 +116,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/allDonations',
                 element: <AllDonations></AllDonations>
+            },
+            {
+                path: '/dashboard/profile',
+                element: <Profile></Profile>
             },
         ],
     },

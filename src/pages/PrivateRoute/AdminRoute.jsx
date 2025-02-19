@@ -1,16 +1,19 @@
 import React from 'react';
 import useAuth from '../../hooks/useAuth';
-import { Navigate } from 'react-router-dom';
+import useAdmin from '../../hooks/useAdmin';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { Navigate } from 'react-router-dom';
 
-const PrivateRoute = ({children}) => {
-    const {user, loading} = useAuth()
+const AdminRoute = ({children}) => {
 
-    if(loading){
+    const [user, loading] = useAuth()
+    const [isAdmin, isAdminLoading] = useAdmin()
+
+    if(loading || isAdminLoading){
         return <LoadingSpinner></LoadingSpinner>
     }
 
-    if(user){
+    if(user && isAdmin){
         return children
     }
 
@@ -21,4 +24,4 @@ const PrivateRoute = ({children}) => {
     );
 };
 
-export default PrivateRoute;
+export default AdminRoute;

@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
-import ReactDOM from "react-dom"
+import { useState } from 'react';
 import { useForm } from "react-hook-form"
-import Select from 'react-select';
 import { getImageURL } from '../../../api/utils';
-import axios from 'axios';
 import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import Form from '../../../components/form';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+
 const AddPet = () => {
     const {user} = useAuth()
     const axiosSecure = useAxiosSecure()
     const [selectedOption, setSelectedOption] = useState(null);
-    const { register, handleSubmit, formState: { errors }, } = useForm()
 
     const onSubmit = async(data) => {
         const image = await getImageURL(data.image[0])
@@ -45,11 +42,9 @@ const AddPet = () => {
             console.log(error)
         }
     }
-    // console.log(selectedOption.value)
-
     
     return (
-        <div className=' text-black md:p-12'>
+        <div className=' text-black'>
             <h1 className='text-2xl font-medium text-center'>Add Pet</h1>
             <Form myPet={false} onSubmit={onSubmit} selectedOption={selectedOption} setSelectedOption={setSelectedOption}></Form>
         </div>

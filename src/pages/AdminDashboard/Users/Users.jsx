@@ -10,10 +10,11 @@ import {
 } from "@/components/ui/table"
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 const Users = () => {
     const axiosSecure = useAxiosSecure()
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ['allUsers'],
         queryFn: async () => {
             const { data } = await axiosSecure.get('https://pet-adoption-server-psi.vercel.app/users')
@@ -21,9 +22,9 @@ const Users = () => {
         }
     })
 
-    // const handleMakeAdmin = (id) => {
-    //     console.log(id)
-    // }
+    if(isLoading){
+        return <LoadingSpinner></LoadingSpinner>
+    }
     const handleMakeAdmin = async (email) => {
         const adoptedStatus = {
             role: 'Admin',

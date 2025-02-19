@@ -1,4 +1,4 @@
-import React from 'react';
+
 import missionImg from '../../assets/mision/mission.jpg'
 const OurMission = () => {
     return (
@@ -7,7 +7,7 @@ const OurMission = () => {
                 <img src={missionImg} alt="" />
             </div>
             <div>
-                <h1 className='text-2xl'>Our Mission</h1>
+                <h1 className='text-3xl font-medium'>Our Mission</h1>
                 <p className='my-4'>To provide loving homes for homeless animals, promote responsible pet ownership, and create a compassionate community committed to animal welfare and care.</p>
 
                 <ul className='ml-14 mt-8 mb-4'>

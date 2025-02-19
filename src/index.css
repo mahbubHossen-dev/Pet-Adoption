@@ -123,6 +123,10 @@ nav ul li a.active{
   padding-top: 3px;
 }
 
+.menu-list ul li a.active{
+  background-color: #C2410C;
+}
+
 /* nav ul li a.active{
   background-color: #F97315;
 } */

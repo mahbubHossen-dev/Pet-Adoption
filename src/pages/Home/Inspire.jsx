@@ -3,7 +3,7 @@ import insImage from '../../assets/ins/1.webp'
 import { Link } from 'react-router-dom';
 const Inspire = () => {
     return (
-        <section className="bg-orange-100 py-16 px-6 text-center mt-16">
+        <section className="bg-orange-100 py-16 mt-24 px-6 text-center">
             <div className="max-w-4xl mx-auto">
                 <h2 className="text-4xl font-bold text-gray-800 mb-4">
                     Give a Pet a Loving Home ❤️

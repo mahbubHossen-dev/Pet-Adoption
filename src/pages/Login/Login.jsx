@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
@@ -15,6 +15,8 @@ const Login = () => {
     const location = useLocation()
     const [email, setEmail] = useState('')
     const [defaultPass, setDefaultPass] = useState('')
+    const emailRef = useRef()
+    const passRef = useRef()
     // console.log(user)
 
     const handleLogin = (e) => {
@@ -22,7 +24,7 @@ const Login = () => {
         const form = e.target
         const email = form.email.value;
         const password = form.password.value;
-
+        
 
         signInUser(email, password)
 
@@ -38,11 +40,21 @@ const Login = () => {
     }
 
     const showUser = () => {
+        emailRef.current.value = 'abc@gmail.com'
+        passRef.current.value = '123456Aa'
+        
         setEmail('abc@gmail.com')
         setDefaultPass('123456Aa')
+        // console.log(email)
     }
 
     const showAdmin = () => {
+        // emailRef.current.value = ''
+        // if(emailRef.current.value){
+        //     emailRef.current.value = ''
+        // }
+        emailRef.current.value = 'mahbubhossen172@gmail.com'
+        passRef.current.value = '123456Aa'
         setEmail('mahbubhossen172@gmail.com')
         setDefaultPass('123456Aa')
     }
@@ -75,6 +87,7 @@ const Login = () => {
                                     </label>
                                     <div className="relative">
                                         <input
+                                            ref={emailRef}
                                             defaultValue={email}
                                             className="py-2 outline-[#FA7316] w-full p-3 rounded-md  text-black border-2"
                                             type='email'
@@ -93,6 +106,7 @@ const Login = () => {
                                     </label>
                                     <div className="relative">
                                         <input
+                                            ref={passRef}
                                             defaultValue={defaultPass}
                                             className="py-2 outline-orange-500 w-full p-3 rounded-md  text-black  border-2"
                                             type='password'
