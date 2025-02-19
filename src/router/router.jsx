@@ -23,6 +23,7 @@ import AllPets from "../pages/AdminDashboard/AllPets/AllPets";
 import AllDonations from "../pages/AdminDashboard/AllDonations/AllDonations";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import PetServices from "../pages/Home/PetServices";
+import Faq from "../pages/Faq/Faq";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path: '/donationCampaigns',
                 element: <DonationCampaigns></DonationCampaigns>
+            },
+            {
+                path: '/faq',
+                element: <Faq></Faq>
             },
             {
                 path: '/donationDetails/:id',

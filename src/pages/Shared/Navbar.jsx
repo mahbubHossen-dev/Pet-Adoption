@@ -47,18 +47,32 @@ const Navbar = () => {
         } */}
 
         <li className='text-black text-md'>
-            <NavLink to='/' className='px-6 py-1 rounded-full'>Home</NavLink>
+            <NavLink to='/' className='px-3 py-1 rounded-full'>Home</NavLink>
         </li>
         <li className='text-black text-md'>
-            <NavLink to='/pets' className='px-6 py-1 rounded-full'>
+            <NavLink to='/pets' className='px-3 py-1 rounded-full'>
                 Pet Listing
             </NavLink>
         </li>
         <li className=' text-black text-md'>
-            <NavLink to='/donationCampaigns' className='px-6 rounded-full py-1'>
+            <NavLink to='/donationCampaigns' className='px-3 rounded-full py-1'>
                 Donation Campaigns
             </NavLink>
         </li>
+        {
+            user && <>
+                <li className=' text-black text-md'>
+            <NavLink to='/dashboard' className='px-3 rounded-full py-1'>
+                Dashboard
+            </NavLink>
+        </li>
+        <li className=' text-black text-md'>
+            <NavLink to='/faq' className='px-3 rounded-full py-1'>
+                FAQ
+            </NavLink>
+        </li>
+            </>
+        }
     </>
 
     return (
