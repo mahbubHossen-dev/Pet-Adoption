@@ -19,7 +19,7 @@ import image6 from "../../assets/testimonials_Image/client-6.jpg"
 
 const Feedback = () => {
     return (
-        <div className='w-full '>
+        <div className='w-full my-12'>
             <h2 className='text-2xl text-center text-white/90 dark:text-black'>Client Feedback</h2>
             <Swiper navigation={true} loop={true} direction='horizontal' modules={[Navigation]} className="mySwiper rounded-md mt-10">
                 <SwiperSlide>

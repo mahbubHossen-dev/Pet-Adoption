@@ -20,7 +20,7 @@ const UpdateMyPet = () => {
     const { data: myPet = {}, isLoading } = useQuery({
         queryKey: ['pets', user?.email],
         queryFn: async () => {
-            const { data } = await axios.get(`https://pet-adoption-server-psi.vercel.app/details/${id}`)
+            const { data } = await axios.get(`http://localhost:3000/details/${id}`)
             return data
         }
     })

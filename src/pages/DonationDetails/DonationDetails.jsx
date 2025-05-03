@@ -21,6 +21,7 @@ const DonationDetails = () => {
         queryKey: ['donatedAmount', _id],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/allDonations/${_id}`)
+            console.log(data)
             // return data
             const total = data.reduce((acc, campaign) => acc + campaign.donarInfo.amount, 0);
             return total

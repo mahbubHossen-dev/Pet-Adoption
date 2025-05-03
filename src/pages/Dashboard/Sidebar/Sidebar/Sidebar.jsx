@@ -30,6 +30,12 @@ const Sidebar = () => {
                     <>
                         <div >
                             <ul className='pb-3'>
+                                {
+                                    isAdmin ?
+                                        <li className=''><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/statics'}>Statics</NavLink></li> 
+                                        : <li className=''><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/overview'}>Overview</NavLink></li>
+
+                                }
                                 <li className=''><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/addPet'}>Add a pet</NavLink></li>
                                 <li className='  '><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/myAddedPets'}>My added pets</NavLink></li>
                                 <li className='  '><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/adoptionRequest'}>Adoption Request</NavLink></li>
@@ -58,14 +64,14 @@ const Sidebar = () => {
                         </div>
 
                         {
-                            isAdmin ? 
-                            <div className='border-t-2  py-3'>
-                                <ul className=''>
-                                    <li className=''><NavLink to={'/dashboard/users'} className={` hover:bg-orange-600 p-2 text-white block`}>Users</NavLink></li>
-                                    <li className=''><NavLink to={'/dashboard/allPets'} className={` hover:bg-orange-600 p-2 text-white block`}>All Pets</NavLink></li>
-                                    <li className=''><NavLink to={'/dashboard/allDonations'} className={` hover:bg-orange-600 p-2 text-white block`}>All Donations</NavLink></li>
-                                </ul>
-                            </div> : ""
+                            isAdmin ?
+                                <div className='border-t-2  py-3'>
+                                    <ul className=''>
+                                        <li className=''><NavLink to={'/dashboard/users'} className={` hover:bg-orange-600 p-2 text-white block`}>Users</NavLink></li>
+                                        <li className=''><NavLink to={'/dashboard/allPets'} className={` hover:bg-orange-600 p-2 text-white block`}>All Pets</NavLink></li>
+                                        <li className=''><NavLink to={'/dashboard/allDonations'} className={` hover:bg-orange-600 p-2 text-white block`}>All Donations</NavLink></li>
+                                    </ul>
+                                </div> : ""
                         }
 
                     </>

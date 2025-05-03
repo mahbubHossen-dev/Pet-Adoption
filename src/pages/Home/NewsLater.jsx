@@ -18,7 +18,7 @@ function NewsLater() {
     }
 
     return (
-        <div className="border-2 border-white  bg-opacity-25 rounded-2xl mx-auto w-3/4 p-6  bg-orange-500 mt-24">
+        <div className="border-2 border-white  bg-opacity-25 rounded-2xl mx-auto w-3/4 p-6  bg-orange-500 my-24 ">
             <div  className="rounded-2xl  text-center py-16 space-y-4 bg-orange-500">
                     <h1 className="text-2xl font-medium">Subscribe to our Newsletter</h1>
                     <p>Get the latest updates and news right in your inbox!</p>

@@ -24,6 +24,8 @@ import AllDonations from "../pages/AdminDashboard/AllDonations/AllDonations";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import PetServices from "../pages/Home/PetServices";
 import Faq from "../pages/Faq/Faq";
+import OverView from "../pages/Dashboard/OverView/OverView";
+import Statics from "../pages/Dashboard/Statics/Statics";
 
 const router = createBrowserRouter([
     {
@@ -42,7 +44,7 @@ const router = createBrowserRouter([
                 path: '/details/:id',
                 element: <Details></Details>,
                 // loader: ()
-                loader: ({params}) => fetch(`https://pet-adoption-server-psi.vercel.app/details/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:3000/details/${params.id}`)
             },
             {
                 path: '/donationCampaigns',
@@ -56,7 +58,7 @@ const router = createBrowserRouter([
                 path: '/donationDetails/:id',
                 element: <DonationDetails></DonationDetails>,
                 // loader: ()
-                loader: ({params}) => fetch(`https://pet-adoption-server-psi.vercel.app/donationDetails/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:3000/donationDetails/${params.id}`)
             },
             
             {
@@ -81,6 +83,14 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/addPet',
                 element: <PrivateRoute><AddPet></AddPet></PrivateRoute>
+            },
+            {
+                path: '/dashboard/overview',
+                element: <PrivateRoute><OverView></OverView></PrivateRoute>
+            },
+            {
+                path: '/dashboard/statics',
+                element: <PrivateRoute><Statics></Statics></PrivateRoute>
             },
             {
                 path: '/dashboard/myAddedPets',

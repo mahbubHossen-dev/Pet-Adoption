@@ -82,7 +82,6 @@ const Form = ({myPet, onSubmit, selectedOption, setSelectedOption}) => {
 
                 <div className='text-center'>
                     <input className='bg-red-200 mx-auto py-2 px-4 rounded-full cursor-pointer' type="submit" />
-
                 </div>
             </form>
         </div>

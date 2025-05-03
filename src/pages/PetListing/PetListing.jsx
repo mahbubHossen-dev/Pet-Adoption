@@ -72,12 +72,12 @@ const PetListing = () => {
         <h1 className="text-center text-2xl mb-6">Not Adopted Pets</h1>
 
         {/* Filters */}
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-6 ">
           <select
             onChange={(e) => setCategory(e.target.value)}
             defaultValue="Category"
             name="status"
-            className="border py-2 px-2 rounded w-60"
+            className="border py-2 px-2 rounded w-60 border-[#FCB98B] outline-[#FCB98B]"
           >
             <option value="Category" disabled>
               Category
@@ -87,11 +87,13 @@ const PetListing = () => {
             <option value="Bird">Bird</option>
             <option value="Fish">Fish</option>
           </select>
+
+          {/* search */}
           <input
             onChange={(e) => setSearch(e.target.value)}
             type="text"
             placeholder="Search by name"
-            className="border-2 p-2 rounded-full"
+            className="border-2 p-2 rounded-full border-[#FCB98B] outline-[#FCB98B]"
           />
         </div>
 

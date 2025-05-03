@@ -24,7 +24,9 @@ const Achievements = () => {
                                 <CiTrophy className='text-5xl text-orange-500' />
                             </div>
                             <div className=''>
-                                <h1 className='text-2xl font-bold'><div ref={ref}>{isVisible ? <CountUp end={2500} /> : ''}</div></h1>
+                                <div className='text-2xl font-bold'>
+                                    <h1 ref={ref}>{isVisible ? <CountUp end={2500} /> : ''}</h1>
+                                </div>
                                 <p className='text-sm ml-1'>USERS</p>
                             </div>
                         </div>
@@ -41,7 +43,7 @@ const Achievements = () => {
                             <div>
                                 <MdRateReview className='text-5xl text-orange-500' />
                             </div>
-                            
+
                             <div className=''>
                                 <h1 className='text-2xl font-bold'><div ref={ref}>{isVisible ? <CountUp end={5670} /> : ''}</div></h1>
                                 <p className='text-sm ml-1'>Campaigns</p>

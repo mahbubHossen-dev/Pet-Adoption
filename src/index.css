@@ -108,15 +108,29 @@
     --chart-5: 340 75% 55%
   }
 }
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 98%;
 
-@layer base {
+  --chart-1: 222.2 47.4% 11.2%;
+  --chart-2: 142.1 76.2% 36.3%;
+  --chart-3: 52.2 100% 50%;
+  --chart-4: 291.6 100% 72.9%;
+  --chart-5: 12 90% 60%;
+
+  /* আরো variable লাগলে এখানে যুক্ত করো */
+}
+
+/* @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
   }
-}
+} */
 nav ul li a.active{
   background-color: #F97315;
   font-weight: 500;

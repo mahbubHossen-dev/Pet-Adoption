@@ -47,12 +47,12 @@ const AuthProvider = ({ children }) => {
                 setUser(currUser)
                 const user = {email: currUser?.email}
 
-                axios.post(`https://pet-adoption-server-psi.vercel.app/jwt`, user, {withCredentials: true})
+                axios.post(`http://localhost:3000/jwt`, user, {withCredentials: true})
                     .then(data => console.log(data.data))
 
             } else {
                 setUser(null)
-                axios.post('https://pet-adoption-server-psi.vercel.app/logout', {}, {withCredentials: true})
+                axios.post('http://localhost:3000/logout', {}, {withCredentials: true})
                     .then(data => console.log(data.data))
             }
             setLoading(false)

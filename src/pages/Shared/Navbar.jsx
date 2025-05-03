@@ -5,10 +5,12 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import useAuth from '../../hooks/useAuth';
 import Container from '../../components/Container';
 import toast from 'react-hot-toast';
+import useAdmin from '../../hooks/useAdmin';
 
 const Navbar = () => {
     const { user, signOutUser } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
+    const [isAdmin, isAdminLoading] = useAdmin()
     // console.log(isDarkMood)
     const [isScroll, setIsScroll] = useState(false)
     const location = useLocation()
@@ -18,7 +20,7 @@ const Navbar = () => {
 
     // }
     // console.log(user)
-
+    // console.log(user)
     const handleLogOut = async () => {
         signOutUser()
             .then(() => {
@@ -27,7 +29,6 @@ const Navbar = () => {
             .catch(err => {
                 toast.err(err.message)
             })
-
     }
     // useEffect(() => {
     //     window.addEventListener('scroll', () => {
@@ -62,15 +63,15 @@ const Navbar = () => {
         {
             user && <>
                 <li className=' text-black text-md'>
-            <NavLink to='/dashboard' className='px-3 rounded-full py-1'>
-                Dashboard
-            </NavLink>
-        </li>
-        <li className=' text-black text-md'>
-            <NavLink to='/faq' className='px-3 rounded-full py-1'>
-                FAQ
-            </NavLink>
-        </li>
+                    <NavLink to={`/dashboard/${user && isAdmin ? 'statics' : 'overview'}`} className='px-3 rounded-full py-1'>
+                        Dashboard
+                    </NavLink>
+                </li>
+                <li className=' text-black text-md'>
+                    <NavLink to='/faq' className='px-3 rounded-full py-1'>
+                        FAQ
+                    </NavLink>
+                </li>
             </>
         }
     </>

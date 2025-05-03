@@ -54,7 +54,7 @@ const Register = () => {
 
             setUser(result.user)
 
-            await axios.post(`https://pet-adoption-server-psi.vercel.app/users/${result.user?.email}`, {
+            await axios.post(`http://localhost:3000/users/${result.user?.email}`, {
                 name: result.user?.displayName,
                 image: result.user?.photoURL,
                 email: result.user?.email,
