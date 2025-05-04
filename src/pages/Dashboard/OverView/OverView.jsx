@@ -10,7 +10,7 @@ const OverView = () => {
     const { data: donationData = [], isLoading } = useQuery({
         queryKey: ['donationCampaigns'],
         queryFn: async () => {
-            const { data } = await axios.get(`http://localhost:3000/donations`)
+            const { data } = await axios.get(`https://pet-adoption-server-psi.vercel.app/donations`)
             return data
         }
     })

@@ -14,7 +14,7 @@ const Statics = () => {
     // const { data: donationData = [], isLoading } = useQuery({
     //     queryKey: ['donationCampaigns'],
     //     queryFn: async () => {
-    //         const { data } = await axios.get(`http://localhost:3000/allDonations`)
+    //         const { data } = await axios.get(`https://pet-adoption-server-psi.vercel.app/allDonations`)
     //         // console.log(data)
     //         return data
     //     }

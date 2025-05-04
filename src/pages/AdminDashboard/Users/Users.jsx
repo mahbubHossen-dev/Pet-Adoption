@@ -17,7 +17,7 @@ const Users = () => {
     const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ['allUsers'],
         queryFn: async () => {
-            const { data } = await axiosSecure.get('http://localhost:3000/users')
+            const { data } = await axiosSecure.get('https://pet-adoption-server-psi.vercel.app/users')
             return data
         }
     })
@@ -31,7 +31,6 @@ const Users = () => {
         }
         try {
             const { data } = await axiosSecure.patch(`/makeAdmin/${email}`, adoptedStatus)
-
             refetch()
             console.log(data)
         } catch (error) {

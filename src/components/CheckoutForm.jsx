@@ -21,7 +21,7 @@ const CheckoutForm = ({ amount, donationDetails, closeModal, setPetInDetails }) 
     // console.log(donationDetails._id)
     const getPaymentIntent = async () => {
         try {
-            const { data } = await axiosSecure.post('http://localhost:3000/create-payment-intent', {
+            const { data } = await axiosSecure.post('https://pet-adoption-server-psi.vercel.app/create-payment-intent', {
                 petId: donationDetails.petId,
                 amount,
                 donationId: donationDetails?._id
@@ -87,7 +87,7 @@ const CheckoutForm = ({ amount, donationDetails, closeModal, setPetInDetails }) 
             }
 
             try {
-                const { data } = await axiosSecure.post(`http://localhost:3000/add-donation`, donationPetDetails)
+                const { data } = await axiosSecure.post(`https://pet-adoption-server-psi.vercel.app/add-donation`, donationPetDetails)
                 if(data.insertedId){
                     const {data} = await axiosSecure.get('/threePets')
                     setPetInDetails(data) 

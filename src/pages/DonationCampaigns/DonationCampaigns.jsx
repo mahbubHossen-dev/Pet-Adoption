@@ -11,7 +11,7 @@ const DonationCampaigns = () => {
     const { data: donationData = [], isLoading } = useQuery({
         queryKey: ['donationCampaigns', sortByPrice],
         queryFn: async () => {
-            const { data } = await axios.get(`http://localhost:3000/donations?sortPrice=${sortByPrice}`)
+            const { data } = await axios.get(`https://pet-adoption-server-psi.vercel.app/donations?sortPrice=${sortByPrice}`)
             return data
         }
     })

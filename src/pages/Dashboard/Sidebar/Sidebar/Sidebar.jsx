@@ -7,6 +7,7 @@ import useAdmin from './../../../../hooks/useAdmin';
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isAdmin] = useAdmin()
+    console.log(isAdmin)
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
     };

@@ -44,7 +44,7 @@ const router = createBrowserRouter([
                 path: '/details/:id',
                 element: <Details></Details>,
                 // loader: ()
-                loader: ({params}) => fetch(`http://localhost:3000/details/${params.id}`)
+                loader: ({params}) => fetch(`https://pet-adoption-server-psi.vercel.app/details/${params.id}`)
             },
             {
                 path: '/donationCampaigns',
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
                 path: '/donationDetails/:id',
                 element: <DonationDetails></DonationDetails>,
                 // loader: ()
-                loader: ({params}) => fetch(`http://localhost:3000/donationDetails/${params.id}`)
+                loader: ({params}) => fetch(`https://pet-adoption-server-psi.vercel.app/donationDetails/${params.id}`)
             },
             
             {

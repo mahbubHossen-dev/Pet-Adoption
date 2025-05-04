@@ -23,7 +23,7 @@ const AllPets = () => {
     const { data: allPets = [], refetch, isLoading} = useQuery({
         queryKey: ['allPets'],
         queryFn: async () => {
-            const { data } = await axiosSecure.get('http://localhost:3000/allPets')
+            const { data } = await axiosSecure.get('https://pet-adoption-server-psi.vercel.app/allPets')
             return data
         }
     })

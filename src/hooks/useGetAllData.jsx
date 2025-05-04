@@ -9,7 +9,7 @@ const useGetAllData = (payload) => {
     const { data = [], isLoading } = useQuery({
         queryKey: [payload],
         queryFn: async () => {
-            const { data } = await axiosSecure.get(`http://localhost:3000/${payload}`)
+            const { data } = await axiosSecure.get(`https://pet-adoption-server-psi.vercel.app/${payload}`)
             // console.log(data)
             return data
         }
