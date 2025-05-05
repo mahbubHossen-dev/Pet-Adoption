@@ -19,7 +19,7 @@ const Navbar = () => {
     // if () {
 
     // }
-    // console.log(user)
+    // console.log('isAdmin', isAdmin)
     // console.log(user)
     const handleLogOut = async () => {
         signOutUser()

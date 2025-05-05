@@ -3,16 +3,13 @@ import auth from './../../firebase.config';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile, GithubAuthProvider } from 'firebase/auth';
 import axios from 'axios';
 
-
-
 export const AuthContext = createContext(null)
 
 const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
-    // console.log(user)
-    // console.log(user)
+
     const createUser = (email, password) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
@@ -42,29 +39,33 @@ const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, currUser => {
+        const unsubscribe = onAuthStateChanged(auth, async (currUser) => {
             if (currUser) {
-                setUser(currUser)
-                const user = {email: currUser?.email}
+                setUser(currUser);
+                const user = { email: currUser.email };
 
-                axios.post(`https://pet-adoption-server-psi.vercel.app/jwt`, user, {withCredentials: true})
-                    .then(data => console.log(data.data))
+                try {
+                    await axios.post('https://pet-adoption-server-psi.vercel.app/jwt', user, {
+                        withCredentials: true,
+                    });
+                    
+                } catch (err) {
+                    console.error(' JWT set failed', err);
+                }
 
             } else {
-                setUser(null)
-                axios.post('https://pet-adoption-server-psi.vercel.app/logout', {}, {withCredentials: true})
-                    .then(data => console.log(data.data))
+                setUser(null);
+                await axios.post('https://pet-adoption-server-psi.vercel.app/logout', {}, {
+                    withCredentials: true,
+                });
+                console.log('🧹 Cookie cleared');
             }
-            setLoading(false)
 
-        })
+            setLoading(false);
+        });
 
-
-        return () => {
-            unsubscribe()
-        }
-
-    }, [])
+        return () => unsubscribe();
+    }, []);
 
 
     const githubProvider = new GithubAuthProvider();
@@ -72,7 +73,6 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return signInWithPopup(auth, githubProvider)
     }
-    
 
     const authInfo = {
         user,

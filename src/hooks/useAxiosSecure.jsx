@@ -22,6 +22,7 @@ const useAxiosSecure = () => {
                 .then(() => {
                     navigate('/login')
                 })
+                console.log('------------error')
             }
 
             return Promise.reject(error)

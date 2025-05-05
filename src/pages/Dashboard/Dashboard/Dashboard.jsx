@@ -22,7 +22,6 @@ const Dashboard = () => {
             .catch(err => {
                 toast.err(err.message)
             })
-
     }
     return (
         <div className=''>
