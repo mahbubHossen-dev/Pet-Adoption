@@ -20,7 +20,7 @@ const AllPets = () => {
 
     const axiosSecure = useAxiosSecure()
 
-    const { data: allPets = [], refetch, isLoading} = useQuery({
+    const { data: allPets = [], refetch, isLoading } = useQuery({
         queryKey: ['allPets'],
         queryFn: async () => {
             const { data } = await axiosSecure.get('https://pet-adoption-server-psi.vercel.app/allPets')
@@ -28,56 +28,56 @@ const AllPets = () => {
         }
     })
 
-        const handleMyPetsDelete = (id) => {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then(async(result) => {
-                if (result.isConfirmed) {
-                    try {
-                        const { data } = await axiosSecure.delete(`/removeMyPet/${id}`, {withCredentials: true})
-                        if(data.deletedCount > 0){
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
-                            });
-                            refetch()
-                        }
-                    } catch (error) {
-                        console.log(error)
+    const handleMyPetsDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const { data } = await axiosSecure.delete(`/removeMyPet/${id}`, { withCredentials: true })
+                    if (data.deletedCount > 0) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                        refetch()
                     }
+                } catch (error) {
+                    console.log(error)
                 }
-            });
-        }
-    
-        
-    
-        const handleAdopted = async (id) => {
-            const adoptedStatus = {
-                adopted: true,
-                adoptionStatus: 'Adopted'
             }
-            try {
-                const { data } = await axiosSecure.patch(`/petAdopted/${id}`, adoptedStatus)
-                
-                refetch()
-                console.log(data)
-            } catch (error) {
-                console.log(error)
-            }
-    
-        }
+        });
+    }
 
 
-        if(isLoading){
-                return <LoadingSpinner></LoadingSpinner>
-            }
+
+    const handleAdopted = async (id) => {
+        const adoptedStatus = {
+            adopted: true,
+            adoptionStatus: 'Adopted'
+        }
+        try {
+            const { data } = await axiosSecure.patch(`/petAdopted/${id}`, adoptedStatus)
+
+            refetch()
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+
+    if (isLoading) {
+        return <LoadingSpinner></LoadingSpinner>
+    }
 
     return (
         <div>
@@ -90,9 +90,10 @@ const AllPets = () => {
                         <TableHead>Image</TableHead>
                         <TableHead>Category</TableHead>
                         <TableHead>Name</TableHead>
-                        <TableHead>Adoption Status</TableHead>
+                        
                         <TableHead>Update</TableHead>
                         <TableHead>Delete</TableHead>
+                        <TableHead>Adoption Status</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -104,17 +105,31 @@ const AllPets = () => {
                             <TableCell className="font-medium">{pet.category}</TableCell>
 
                             
+                            <TableCell className="font-medium">
+                                <Link to={`/dashboard/update/${pet._id}`}>
+                                    <button className='text-orange-500 py-2 px-3'>
+                                        <CiEdit className='text-2xl' />
+                                    </button>
+                                </Link>
+                            </TableCell>
 
+                            <TableCell className="font-medium">
+                                <button className='text-orange-600 py-2 px-3'
+                                    onClick={() => handleMyPetsDelete(pet._id)}>
+                                    <MdDelete className='text-2xl' />
+                                </button>
+                            </TableCell>
 
                             {
-                                <TableCell className="font-medium">{pet.adoptionStatus ? pet.adoptionStatus : 'Not Adopted'}</TableCell>
+                                pet?.adoptionStatus == 'Adopted' ? <TableCell className="font-medium">
+                                    <button className='text-green-600 py-2 px-3 text-center'>Adopted</button>
+                                </TableCell>
+                                    : <TableCell className="font-medium">
+                                        <button className='border border-orange-600 rounded-xl py-2 px-3'
+                                            onClick={() => handleAdopted(pet._id, pet.adoptedStatus, pet.adopted)}>Adopt Now</button>
+                                    </TableCell>
                             }
 
-                            {/* <TableCell className="font-medium">{pet.adopted === true ? 'Adopted' : 'Not Adopted'}</TableCell> */}
-                            <TableCell className="font-medium"><Link to={`/dashboard/update/${pet._id}`}><button className='bg-gray-400 py-2 px-3'><CiEdit className='text-2xl'/></button></Link></TableCell>
-                            <TableCell className="font-medium"><button className='bg-gray-400 py-2 px-3' onClick={() => handleMyPetsDelete(pet._id)}><MdDelete className='text-2xl'/></button></TableCell>
-                            <TableCell className="font-medium"><button className='bg-gray-400 py-2 px-3'
-                            onClick={() => handleAdopted(pet._id, pet.adoptedStatus, pet.adopted)}>Adopt Now</button></TableCell>
                         </TableRow>)
                     }
 

@@ -18,6 +18,7 @@ import Swal from 'sweetalert2';
 import { Link, useLocation } from 'react-router-dom';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import { CiEdit } from 'react-icons/ci';
 
 
 const MyAddedPets = () => {
@@ -93,8 +94,8 @@ const MyAddedPets = () => {
         return <LoadingSpinner></LoadingSpinner>
     }
     return (
-        <div className=''>
-            <h3 className='text-2xl font-medium text-center mb-4'>My Added Pets</h3>
+        <div className='pt-12'>
+            <h3 className='text-2xl font-medium text-center mb-6'>My Added Pets</h3>
             <Table>
                 <TableCaption>A list of your recent invoices.</TableCaption>
                 <TableHeader>
@@ -116,18 +117,28 @@ const MyAddedPets = () => {
                             <TableCell onClick={handleSort} className="font-medium cursor-pointer">{pet.name}</TableCell>
                             <TableCell className="font-medium">{pet.category}</TableCell>
 
-
-
-
                             {
                                 <TableCell className="font-medium">{pet.adopted ? 'Adopted' : 'Not Adopted'}</TableCell>
                             }
 
-                            <TableCell className="font-medium"><Link to={`/dashboard/update/${pet._id}`} state={location.pathname} ><button className='btn py-2 px-3 bg-gray-500 text-white'>Update</button></Link></TableCell>
+                            <TableCell className="font-medium"><Link to={`/dashboard/update/${pet._id}`} state={location.pathname} >
+                                <button className='text-orange-500 py-2 px-3'>
+                                    <CiEdit className='text-2xl ' />
+                                </button></Link></TableCell>
 
-                            <TableCell className="font-medium "><button className='btn py-2 px-3 bg-gray-500 text-white' onClick={() => handleMyPetsDelete(pet._id)}><MdDelete className='text-xl' /></button></TableCell>
+                            <TableCell className="font-medium "><button className='text-orange-600 py-2 px-3 ' onClick={() => handleMyPetsDelete(pet._id)}><MdDelete className='text-2xl hover:text-red-700' /></button></TableCell>
 
-                            <TableCell className="font-medium "><button className='btn py-2 px-3 bg-gray-500 text-white' onClick={() => handleAdopted(pet._id, pet.adoptedStatus, pet.adopted)}>Adopt</button></TableCell>
+                            {
+                                pet?.adoptionStatus == 'Adopted' ? <TableCell className="font-medium">
+                                    <button className='text-green-600 py-2 px-3 text-center'>Adopted</button>
+                                </TableCell>
+                                    : <TableCell className="font-medium">
+                                        <button className='border border-orange-600 rounded-xl py-2 px-3'
+                                            onClick={() => handleAdopted(pet._id, pet.adoptedStatus, pet.adopted)}>Adopt Now</button>
+                                    </TableCell>
+                            }
+
+                            {/* <TableCell className="font-medium "><button className='btn py-2 px-3 bg-gray-500 text-white' onClick={() => handleAdopted(pet._id, pet.adoptedStatus, pet.adopted)}>Adopt</button></TableCell> */}
                         </TableRow>)
                     }
 

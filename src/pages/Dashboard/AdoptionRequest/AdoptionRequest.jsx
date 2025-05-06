@@ -18,60 +18,65 @@ import SeeRequestModal from '../../../components/SeeRequestModal';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 const AdoptionRequest = () => {
-    const {user} = useAuth()
+    const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const {data: requestData = [], isLoading} = useQuery({
+    const { data: requestData = [], isLoading } = useQuery({
         queryKey: ['adoptionRequest', user?.email],
         queryFn: async () => {
-            const {data} = await axiosSecure.get(`/myAdoptionRequest/${user?.email}`)
+            const { data } = await axiosSecure.get(`/myAdoptionRequest/${user?.email}`)
             return data;
         },
     })
-    
+
     console.log(requestData)
 
-    if(isLoading){
+    if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }
-    
+
 
     return (
-        <div>
-            <h3 className='text-2xl font-medium text-center mb-4'>Adoptions Request</h3>
-            <Table>
-                <TableCaption>A list of your recent invoices.</TableCaption>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>s/n</TableHead>
-                        <TableHead>Pet Image</TableHead>
-                        <TableHead>Pet Name</TableHead>
-                        <TableHead>Category</TableHead>
-                        <TableHead>Adoption Request</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
+        <div className='pt-12'>
+            <h3 className={`text-2xl font-medium text-center mb-6 ${requestData.length > 0 ? 'text-center' : 'text-center pt-12'}`}>{requestData.length > 0 ? 'Adoptions Request' : 'Request Not Available'}</h3>
+            {requestData.length > 0 &&
+                <Table>
+                    <TableCaption>A list of your recent invoices.</TableCaption>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>s/n</TableHead>
+                            <TableHead>Pet Image</TableHead>
+                            <TableHead>Pet Name</TableHead>
+                            <TableHead>Category</TableHead>
+                            <TableHead>Adoption Request</TableHead>
+                        </TableRow>
+                    </TableHeader>
+
+                    <TableBody>
 
 
-                    {   requestData.length > 0 ?
-                        requestData?.map((request, idx) => <TableRow key={request._id}>
-                            <TableCell className="font-medium">{idx + 1}</TableCell>
-                            <TableCell className="font-medium">
-                                <img src={request.image} className='w-10 h-10' alt="" />
-                            </TableCell>
-                            <TableCell className="font-medium">{request.name}</TableCell>
-                            <TableCell className="font-medium">{request.category}</TableCell>
+                        {
+                            requestData?.map((request, idx) => <TableRow key={request._id}>
+                                <TableCell className="font-medium">{idx + 1}</TableCell>
+                                <TableCell className="font-medium">
+                                    <img src={request.image} className='w-10 h-10' alt="" />
+                                </TableCell>
+                                <TableCell className="font-medium">{request.name}</TableCell>
+                                <TableCell className="font-medium">{request.category}</TableCell>
 
-                            {/* {
+                                {/* {
                                 pet.adoptedStatus === 'requested' && pet.adopted === false? <TableCell className="font-medium">requested</TableCell> : pet.adoptedStatus === 'requested' && pet.adopted === true? <TableCell className="font-medium">Adopted</TableCell>
                             } */}
 
-                            <SeeRequestModal data={request}></SeeRequestModal>
-                        </TableRow>)
-                        : <h2 className='text-3xl text-center mt-12'>Data Not Available</h2>
-                    }
+                                <div className='flex justify-center items-center text-center'>
+                                    <SeeRequestModal data={request}></SeeRequestModal>
+                                </div>
+                            </TableRow>)
 
-                </TableBody>
-            </Table>
+                        }
+                    </TableBody>
+
+                </Table>
+            }
         </div>
     );
 };

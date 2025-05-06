@@ -3,10 +3,21 @@ import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import useAuth from "../../../../hooks/useAuth";
 import useAdmin from "../../../../hooks/useAdmin";
+import { GrOverview } from "react-icons/gr";
+import { BiSolidAlarmAdd } from "react-icons/bi";
+import { MdOutlinePets } from "react-icons/md";
+import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
+import { LiaDonateSolid } from "react-icons/lia";
+import { BiSolidDonateBlood } from "react-icons/bi";
+import { MdOutlineCampaign } from "react-icons/md";
+import { FaDonate, FaHome, FaUsers } from "react-icons/fa";
+import { PiListHeartBold } from "react-icons/pi";
+import { SiCampaignmonitor, SiPetsathome } from "react-icons/si";
+import { HiOutlineViewGridAdd } from "react-icons/hi";
 
 
 const Sidebar = () => {
-    const {user} = useAuth()
+    const { user } = useAuth()
     const [isOpen, setIsOpen] = useState(false);
     const [isAdmin, isAdminLoading] = useAdmin()
     // let isAdmin = false
@@ -40,32 +51,43 @@ const Sidebar = () => {
                             <ul className='pb-3'>
                                 {
                                     isAdmin ?
-                                        <li className=''><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/statics'}>Statics</NavLink></li> 
-                                        : <li className=''><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/overview'}>Overview</NavLink></li>
+                                        <li className='block'><NavLink className={` hover:bg-orange-600 p-2 text-white flex items-center gap-2`} to={'/dashboard/statics'}><HiOutlineViewGridAdd  className="text-xl" /> Statics</NavLink></li>
+                                        : <li className='block'><NavLink className={` hover:bg-orange-600 p-2 text-white flex items-center gap-2`} to={'/dashboard/overview'}><GrOverview   className="text-xl"/> Overview</NavLink></li>
 
                                 }
-                                <li className=''><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/addPet'}>Add a pet</NavLink></li>
-                                <li className='  '><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/myAddedPets'}>My added pets</NavLink></li>
-                                <li className='  '><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/adoptionRequest'}>Adoption Request</NavLink></li>
-                                <li className='  '><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/createCampaign'}>Create Donation Campaign</NavLink></li>
-                                <li className='  '><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/myDonationCampaigns'}>My Donation Campaigns</NavLink></li>
-                                <li className='  '><NavLink className={` hover:bg-orange-600 p-2 text-white block`} to={'/dashboard/myDonations'}>My Donations</NavLink></li>
+                                <li className='block'><NavLink className={` hover:bg-orange-600 p-2 text-white flex items-center gap-2`} to={'/dashboard/addPet'}><BiSolidAlarmAdd className="text-xl" /> Add a pet</NavLink></li>
+
+                                <li className='block'><NavLink className={` hover:bg-orange-600 p-2 text-white flex items-center gap-2`} to={'/dashboard/myAddedPets'}><MdOutlinePets className="text-xl" /> My added pets</NavLink></li>
+
+                                <li className='block'><NavLink className={` hover:bg-orange-600 p-2 text-white  flex items-center gap-2`} to={'/dashboard/adoptionRequest'}><VscGitPullRequestGoToChanges className="text-xl" /> Adoption Request</NavLink></li>
+
+                                <li className='block'>
+                                    <NavLink className={` hover:bg-orange-600 p-2 text-white  flex items-center gap-2`} to={'/dashboard/createCampaign'}>
+                                        <LiaDonateSolid className="text-xl" />
+                                        Create Donation Campaign</NavLink>
+
+                                </li>
+
+                                <li className='block'>
+                                    <NavLink className={` hover:bg-orange-600 p-2 text-white  flex items-center gap-2`} to={'/dashboard/myDonationCampaigns'}><MdOutlineCampaign className="text-xl" /> My Donation Campaigns</NavLink>
+                                </li>
+                                <li className='block'><NavLink className={` hover:bg-orange-600 p-2 text-white  flex items-center gap-2`} to={'/dashboard/myDonations'}><BiSolidDonateBlood className="text-xl" /> My Donations</NavLink></li>
                             </ul>
                         </div>
 
                         <div>
                             <ul className='border-t-2  py-3'>
-                                <li className=''><NavLink to='/' className={` hover:bg-orange-600 p-2 text-white block`}>
-                                    Home
+                                <li className='block'><NavLink to='/' className={` hover:bg-orange-600 p-2 text-white flex items-center gap-2`}>
+                                    <FaHome className="text-xl" /> Home
                                 </NavLink></li>
-                                <li className=''>
-                                    <NavLink to='/pets' className={` hover:bg-orange-600 p-2 text-white block`}>
-                                        Pet Listing
+                                <li className='block'>
+                                    <NavLink to='/pets' className={` hover:bg-orange-600 p-2 text-white flex items-center gap-2`}>
+                                        <PiListHeartBold className="text-xl" /> Pet Listing
                                     </NavLink>
                                 </li>
-                                <li className=''>
-                                    <NavLink to='/donationCampaigns' className={` hover:bg-orange-600 p-2 text-white block`}>
-                                        Donation Campaigns
+                                <li className='block'>
+                                    <NavLink to='/donationCampaigns' className={` hover:bg-orange-600 p-2 text-white flex items-center gap-2`}>
+                                        <SiCampaignmonitor className="text-xl" /> Donation Campaigns
                                     </NavLink>
                                 </li>
                             </ul>
@@ -75,9 +97,10 @@ const Sidebar = () => {
                             isAdmin ?
                                 <div className='border-t-2  py-3'>
                                     <ul className=''>
-                                        <li className=''><NavLink to={'/dashboard/users'} className={` hover:bg-orange-600 p-2 text-white block`}>Users</NavLink></li>
-                                        <li className=''><NavLink to={'/dashboard/allPets'} className={` hover:bg-orange-600 p-2 text-white block`}>All Pets</NavLink></li>
-                                        <li className=''><NavLink to={'/dashboard/allDonations'} className={` hover:bg-orange-600 p-2 text-white block`}>All Donations</NavLink></li>
+                                        <li className='block'><NavLink to={'/dashboard/users'} className={` hover:bg-orange-600 p-2 text-white flex items-center gap-2`}><FaUsers className="text-xl" /> Users</NavLink></li>
+                                        <li className='block'><NavLink to={'/dashboard/allPets'} className={` hover:bg-orange-600 p-2 text-white flex items-center gap-2`}><SiPetsathome className="text-xl" />
+                                        All Pets</NavLink></li>
+                                        <li className='block'><NavLink to={'/dashboard/allDonations'} className={` hover:bg-orange-600 p-2 text-white flex items-center gap-2`}><FaDonate className="text-xl" /> All Donations</NavLink></li>
                                     </ul>
                                 </div> : ""
                         }

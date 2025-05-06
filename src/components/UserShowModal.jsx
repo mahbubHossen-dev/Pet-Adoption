@@ -14,8 +14,9 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import LoadingSpinner from './LoadingSpinner';
 
-const UserShowModal = ({ handleShowUser, id, userDonationData }) => {
+const UserShowModal = ({ handleShowUser, id, userDonationData, modalLoading }) => {
 
     let [isOpen, setIsOpen] = useState(false)
     
@@ -79,8 +80,9 @@ const UserShowModal = ({ handleShowUser, id, userDonationData }) => {
                                             </TableRow>
                                         </TableHeader>
                                         <TableBody>
-                                            {
-                                                userDonationData?.map((donation, idx) => <TableRow key={donation._id}>
+                                            { modalLoading ?
+                                                <LoadingSpinner />
+                                                :userDonationData?.map((donation, idx) => <TableRow key={donation._id}>
                                                     <TableCell className="font-medium">{idx + 1}</TableCell>
 
                                                     <TableCell className="font-medium">{donation.donarInfo.name}</TableCell>

@@ -41,7 +41,7 @@ const Users = () => {
 
     console.log(users)
     return (
-        <div>
+        <div className=''>
              <h3 className='text-2xl font-medium text-center mb-4'>All User</h3>
             <Table>
                 <TableCaption>A list of your recent invoices.</TableCaption>
@@ -66,17 +66,13 @@ const Users = () => {
 
                             {
                                 user?.role == 'Admin' ? <TableCell className="font-medium">
-                                    <button className='text-green-600 py-2 px-3 text-lg'>Admin</button>
+                                    <button className='text-green-600 py-2 px-3 text-lg text-center'>Admin</button>
                                 </TableCell> 
                                 : <TableCell className="font-medium">
-                                    <button onClick={() => handleMakeAdmin(user.email)} className='bg-gray-400 py-2 px-3'>Make Admin</button>
+                                    <button onClick={() => handleMakeAdmin(user.email)} className='border rounded-xl text-orange-600 border-orange-600 py-2 px-3 hover:text-white hover:bg-orange-600'>Make Admin</button>
                                 </TableCell>
                             }
 
-
-
-
-                            {/* <SeeRequestModal data={request} handleAdoptModal={handleAdoptModal}></SeeRequestModal> */}
                         </TableRow>)
                     }
 

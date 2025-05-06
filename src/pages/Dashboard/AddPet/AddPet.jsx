@@ -44,7 +44,7 @@ const AddPet = () => {
     }
     
     return (
-        <div className=' text-black'>
+        <div className='pt-12 text-black'>
             <h1 className='text-2xl font-medium text-center'>Add Pet</h1>
             <Form myPet={false} onSubmit={onSubmit} selectedOption={selectedOption} setSelectedOption={setSelectedOption}></Form>
         </div>

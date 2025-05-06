@@ -23,7 +23,7 @@ const MyDonationCampaign = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const [userDonationData, setUserDonationData] = useState([])
-
+    const [modalLoading, setModalLoading] = useState(true)
     const { data: myDonationPet = [], refetch, isLoading } = useQuery({
         queryKey: ['myDonations', user?.email],
         queryFn: async () => {
@@ -31,6 +31,16 @@ const MyDonationCampaign = () => {
             return data
         }
     })
+
+
+    // const { data: myPets = [], isLoading, refetch } = useQuery({
+    //     queryKey: ['myPets', user?.email],
+    //     queryFn: async () => {
+    //         const { data } = await axiosSecure.get(`/myPets/${user?.email}`)
+    //         return data
+    //     }
+    // })
+
     console.log(myDonationPet)
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
@@ -65,9 +75,14 @@ const MyDonationCampaign = () => {
     const handleShowUser = async (id, openModal) => {
         console.log(id)
         openModal()
+
+        setModalLoading(true)
         try {
             const { data } = await axiosSecure.get(`/donarDetails/${id}`)
-            setUserDonationData(data)
+            if(data){
+                setUserDonationData(data)
+                setModalLoading(false)
+            }
         } catch (error) {
             console.log(error)
         }
@@ -76,44 +91,46 @@ const MyDonationCampaign = () => {
 
     return (
         <div>
-            
-            <h3 className='text-2xl font-medium text-center mb-4'>My Donation Campaigns</h3>
-            <Table>
-                <TableCaption>A list of your recent invoices.</TableCaption>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>s/n</TableHead>
-                        <TableHead>Pet Name</TableHead>
-                        <TableHead>Maximum Donation Amount</TableHead>
-                        <TableHead>Progress Bar</TableHead>
-                        <TableHead>Pause</TableHead>
-                        <TableHead>Edit</TableHead>
-                        <TableHead>View Donators</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {
-                        myDonationPet?.map((donation, idx) => <TableRow key={donation._id}>
-                            <TableCell className="font-medium">{idx + 1}</TableCell>
-                            <TableCell className="font-medium">{donation.name}</TableCell>
-                            <TableCell className="font-medium">{donation.max_donation_amount}</TableCell>
-                            <TableCell className="font-medium">Progress Bar</TableCell>
 
-                            {
-                                donation.pause === true ? <TableCell className="font-medium"><button onClick={() => handleUnPause(donation._id)} className='bg-gray-600 py-2 px-3 text-white'>Unpause</button></TableCell>
-                                    :
-                                    <TableCell className="font-medium"><button className='bg-gray-600 py-2 px-3 text-white' onClick={() => handlePause(donation._id)}>Pause</button></TableCell>
-                            }
+            <h3 className={`text-2xl font-medium mb-4 ${myDonationPet.length > 0 ?'text-center': 'justify-center items-center text-center pt-24'}`}>{myDonationPet.length > 0 ? 'My Donation Campaigns' : 'You are Not created any campaign'}</h3>
+            {
+                myDonationPet.length > 0 && <Table>
+                    <TableCaption>A list of your recent invoices.</TableCaption>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>s/n</TableHead>
+                            <TableHead>Pet Name</TableHead>
+                            <TableHead>Maximum Donation Amount</TableHead>
+                            <TableHead>Progress Bar</TableHead>
+                            <TableHead>Pause</TableHead>
+                            <TableHead>Edit</TableHead>
+                            <TableHead>View Donators</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {
+                            myDonationPet?.map((donation, idx) => <TableRow key={donation._id}>
+                                <TableCell className="font-medium">{idx + 1}</TableCell>
+                                <TableCell className="font-medium">{donation.name}</TableCell>
+                                <TableCell className="font-medium">{donation.max_donation_amount}</TableCell>
+                                <TableCell className="font-medium">Progress Bar</TableCell>
 
-                            <TableCell className="font-medium"><Link state={location.pathname} to={`/dashboard/editDonation/${donation._id}`}><button><CiEdit /></button></Link></TableCell>
+                                {
+                                    donation.pause === true ? <TableCell className="font-medium"><button onClick={() => handleUnPause(donation._id)} className='bg-gray-600 py-2 px-3 text-white'>Unpause</button></TableCell>
+                                        :
+                                        <TableCell className="font-medium"><button className='bg-gray-600 py-2 px-3 text-white' onClick={() => handlePause(donation._id)}>Pause</button></TableCell>
+                                }
 
-                            <TableCell className="font-medium"><UserShowModal handleShowUser={handleShowUser} id={donation._id} userDonationData={userDonationData}></UserShowModal></TableCell>
+                                <TableCell className="font-medium"><Link state={location.pathname} to={`/dashboard/editDonation/${donation._id}`}><button><CiEdit /></button></Link></TableCell>
 
-                        </TableRow>)
-                    }
-                    {/* <FaEye /> */}
-                </TableBody>
-            </Table>
+                                <TableCell className="font-medium"><UserShowModal handleShowUser={handleShowUser} id={donation._id} userDonationData={userDonationData} modalLoading={modalLoading} ></UserShowModal></TableCell>
+
+                            </TableRow>)
+                        }
+                        {/* <FaEye /> */}
+                    </TableBody>
+                </Table>
+            }
         </div>
     );
 };

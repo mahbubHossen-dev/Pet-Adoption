@@ -31,8 +31,8 @@ const Dashboard = () => {
                 </button> */}
 
 
-                <div className='py-2 px-3  font-bold absolute right-2 top-6'>
-                    <div className='relative '>
+                <div className='py-2 px-3  font-bold absolute right-2 top-6 z-50'>
+                    <div className='relative'>
                         <div className='flex flex-row items-center gap-3'>
                             {/* Dropdown btn */}
                             <div

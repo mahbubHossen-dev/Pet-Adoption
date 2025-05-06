@@ -14,7 +14,7 @@ const Form = ({ myPet, onSubmit, selectedOption, setSelectedOption }) => {
     const { name, image, age, location, longDescription, shortDescription } = myPet || {}
 
     return (
-        <div className=' text-black p-12'>
+        <div className=' text-black pt-6'>
             <form onSubmit={handleSubmit(onSubmit)} className='space-y-3'>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6 '>
                     {/* Name */}

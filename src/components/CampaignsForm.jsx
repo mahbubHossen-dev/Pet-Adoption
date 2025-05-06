@@ -8,7 +8,7 @@ const CampaignsForm = ({ onSubmit }) => {
 
 
     return (
-        <div className=' text-black p-12'>
+        <div className=' text-black'>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                     {/* Name */}

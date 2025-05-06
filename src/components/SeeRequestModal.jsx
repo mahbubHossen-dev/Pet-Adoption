@@ -21,11 +21,11 @@ const SeeRequestModal = ({ data, handleAdoptModal }) => {
 
     return (
         <>
-            <div className="flex items-center">
+            <div className="flex items-center text-center justify-center pt-[10px]">
                 <button
                     type="button"
                     onClick={openModal}
-                    className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+                    className="rounded-md border border-orange-600 px-4 py-2 text-sm font-medium text-orange-600 hover:bg-orange-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
                 >
                     Who Request?
                 </button>

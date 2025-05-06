@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { Link, useLocation } from 'react-router-dom';
 import { CiEdit } from 'react-icons/ci';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import { MdDelete } from 'react-icons/md';
 
 
 const AllDonations = () => {
@@ -119,14 +120,14 @@ const AllDonations = () => {
 
                             <TableCell className="font-medium">${donation.max_donation_amount}</TableCell>
 
-                            <TableCell className="font-medium"><button onClick={() => handleCampaignsDelete(donation._id)}>Delete</button></TableCell>
+                            <TableCell className="font-medium"><button  className='text-orange-600 py-2 px-3 ' onClick={() => handleCampaignsDelete(donation._id)}><MdDelete className='text-2xl hover:text-red-700' /></button></TableCell>
 
-                            <TableCell className="font-medium"><Link state={location.pathname} to={`/dashboard/editDonation/${donation._id}`}><button><CiEdit /></button></Link></TableCell>
+                            <TableCell className="font-medium"><Link state={location.pathname} to={`/dashboard/editDonation/${donation._id}`}><button className='text-orange-500 py-2 px-3'><CiEdit className='text-xl'/></button></Link></TableCell>
 
                             {
-                                donation.pause === true ? <TableCell className="font-medium"><button onClick={() => handleUnPause(donation._id)} className='bg-gray-600 py-2 px-3 text-white'>Unpause</button></TableCell>
+                                donation.pause === true ? <TableCell className="font-medium"><button onClick={() => handleUnPause(donation._id)} className='border border-orange-600 rounded-xl text-orange-600 py-2 px-3'>Unpause</button></TableCell>
                                     :
-                                    <TableCell className="font-medium"><button className='bg-gray-600 py-2 px-3 text-white' onClick={() => handlePause(donation._id)}>Pause</button></TableCell>
+                                    <TableCell className="font-medium"><button className='border border-orange-600 rounded-xl text-orange-600 py-2 px-3 ' onClick={() => handlePause(donation._id)}>Pause</button></TableCell>
                             }
 
 

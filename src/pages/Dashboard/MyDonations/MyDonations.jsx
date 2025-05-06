@@ -31,7 +31,7 @@ const MyDonations = () => {
     }
 
     return (
-        <div>
+        <div className='pt-12'>
             
             <h3 className='text-2xl font-medium text-center mb-4'>My Donations</h3>
             <Table>
@@ -39,7 +39,7 @@ const MyDonations = () => {
                 <TableHeader>
                     <TableRow>
                         <TableHead>s/n</TableHead>
-                        <TableHead>Pet Image</TableHead>
+                        {/* <TableHead>Pet Image</TableHead> */}
                         <TableHead>Pet Name</TableHead>
                         <TableHead>Amount</TableHead>
                     </TableRow>
@@ -48,9 +48,9 @@ const MyDonations = () => {
                     {
                         myDonationsInPet?.map((donation, idx) => <TableRow key={donation._id}>
                             <TableCell className="font-medium">{idx + 1}</TableCell>
-                            <TableCell className="font-medium">
+                            {/* <TableCell className="font-medium">
                                 <img src={donation.image} className='w-10 h-10' alt="" />
-                            </TableCell>
+                            </TableCell> */}
                             <TableCell className="font-medium">{donation.name}</TableCell>
                             <TableCell className="font-medium">${donation.donarInfo.amount}</TableCell>
 

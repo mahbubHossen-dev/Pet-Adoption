@@ -40,7 +40,7 @@ const CreateCampaign = () => {
     }
     return (
         <div className=' text-black p-12'>
-            <h3 className='text-2xl font-medium text-center mb-4'>Create Donation Campaigns</h3>
+            <h3 className='text-2xl font-medium text-center mb-6'>Create Donation Campaigns</h3>
             <CampaignsForm myPet={false} onSubmit={onSubmit}></CampaignsForm>
         </div>
     );
